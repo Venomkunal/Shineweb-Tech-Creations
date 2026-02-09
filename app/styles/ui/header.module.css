@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+.logoText {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.tagline {
+    font-size: 0.7rem;
+    color: var(--foreground);
+    margin-top: 5px;
+    position: absolute;
+    left: 120px;
+    top: 50px;
+}
+.navList {
+    display: flex;
+    gap: 50px;
+}
+.cta{
+    display: flex;
+    gap: 40px;
+    padding: 20px;
+}
