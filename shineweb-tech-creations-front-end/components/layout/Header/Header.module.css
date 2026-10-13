@@ -1,0 +1,1475 @@
+
+/* =========================================
+   SHINEWEB TECH CREATIONS
+   Complete Responsive Animated Header
+========================================= */
+
+.header {
+  --nav-bg: #061321;
+  --nav-panel: #0b1d30;
+  --nav-text: #f4f8ff;
+  --nav-muted: #a7b6c9;
+  --nav-cyan: #12c8f5;
+  --nav-border: rgba(148, 187, 220, 0.16);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  color: var(--nav-text);
+  background: rgba(6, 19, 33, 0.97);
+  border-bottom: 1px solid var(--nav-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  animation: headerEnter 450ms ease both;
+}
+
+@keyframes headerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes searchShimmer {
+  from {
+    left: -60%;
+  }
+  to {
+    left: 125%;
+  }
+}
+
+@keyframes searchPanelEnter {
+  from {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes searchInputEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   HEADER CONTAINER
+========================================= */
+
+.container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: min(100% - 40px, 1440px);
+  min-height: 82px;
+  margin-inline: auto;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 11px;
+  color: var(--nav-text);
+  text-decoration: none;
+  transition: transform 220ms ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+.logoMark {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 200, 245, 0.75);
+  border-radius: 50%;
+  background: #0a1d30;
+  box-shadow:
+    0 0 0 3px rgba(18, 200, 245, 0.05),
+    0 0 20px rgba(18, 200, 245, 0.15);
+  transition:
+    box-shadow 250ms ease,
+    border-color 250ms ease,
+    transform 250ms ease;
+}
+
+.brand:hover .logoMark {
+  transform: rotate(-4deg) scale(1.04);
+  border-color: var(--nav-cyan);
+  box-shadow:
+    0 0 0 4px rgba(18, 200, 245, 0.08),
+    0 0 25px rgba(18, 200, 245, 0.28);
+}
+
+.logoImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  object-fit: contain;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.brandName {
+  color: #f7faff;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.45px;
+  white-space: nowrap;
+}
+
+.brandSubtitle {
+  color: var(--nav-cyan);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 1.15px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
+
+.navigation {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: clamp(9px, 1.05vw, 16px);
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.navLinkRow {
+  display: flex;
+  align-items: center;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--nav-muted);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.navLink::after {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--nav-cyan);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible,
+.active {
+  color: #fff;
+}
+
+.navLink:hover::after,
+.navLink:focus-visible::after,
+.active::after {
+  transform: scaleX(1);
+}
+
+/* =========================================
+   NAVIGATION CHEVRON
+========================================= */
+
+.dropdownToggle {
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 38px;
+  flex: 0 0 19px;
+  padding: 0;
+  margin-left: 1px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--nav-muted);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.dropdownToggle:hover {
+  color: var(--nav-cyan);
+}
+
+.chevron {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 180ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* =========================================
+   NAVIGATION DROPDOWN
+========================================= */
+
+.dropdown {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: -14px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+  max-height: min(70vh, 480px);
+  padding: 10px;
+  overflow-y: auto;
+  border: 1px solid var(--nav-border);
+  border-radius: 12px;
+  background: var(--nav-panel);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(7px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
+}
+
+.dropdownHeading {
+  padding: 11px;
+  border-bottom: 1px solid var(--nav-border);
+  color: var(--nav-cyan);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  padding: 10px 11px;
+  border-radius: 7px;
+  color: var(--nav-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.dropdownLink:hover,
+.dropdownLink:focus-visible {
+  color: var(--nav-cyan);
+  background: rgba(18, 200, 245, 0.08);
+}
+
+.dropdownArrow {
+  color: var(--nav-cyan);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.dropdownLink:hover .dropdownArrow,
+.dropdownLink:focus-visible .dropdownArrow {
+  opacity: 1;
+}
+
+.dropdownFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 40px;
+  margin-top: 5px;
+  padding: 10px 11px 4px;
+  border-top: 1px solid var(--nav-border);
+  color: var(--nav-cyan);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (min-width: 961px) {
+  .navItem:hover > .dropdown,
+  .navItem:focus-within > .dropdown,
+  .dropdownOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+/* =========================================
+   ANIMATED SEARCH
+========================================= */
+
+.searchForm {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: clamp(125px, 11vw, 165px);
+  height: 38px;
+  padding-left: 12px;
+  overflow: hidden;
+  border: 1px solid var(--nav-border);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.035);
+  transform-origin: right center;
+  transition:
+    width 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 250ms ease,
+    transform 250ms ease;
+}
+
+.searchForm:hover {
+  border-color: rgba(18, 200, 245, 0.4);
+}
+
+.searchForm:focus-within,
+.searchForm.searchExpanded {
+  border-color: rgba(18, 200, 245, 0.8);
+  background: rgba(18, 200, 245, 0.055);
+  box-shadow:
+    0 0 0 3px rgba(18, 200, 245, 0.055),
+    0 0 22px rgba(18, 200, 245, 0.09);
+}
+
+.searchForm input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--nav-text);
+  font-family: inherit;
+  font-size: 11px;
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+.searchForm input::placeholder {
+  color: #8b9cb0;
+  opacity: 1;
+}
+
+.searchForm input:focus {
+  outline: none;
+}
+
+.searchButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--nav-text);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.searchButton svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 250ms ease;
+}
+
+.searchButton:hover {
+  color: var(--nav-cyan);
+}
+
+.searchForm:hover .searchButton svg,
+.searchForm:focus-within .searchButton svg {
+  transform: scale(1.08);
+}
+
+.searchButton:active svg {
+  transform: scale(0.86);
+}
+
+/* SEARCH SHIMMER */
+
+.searchForm::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 35%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(18, 200, 245, 0.08),
+    transparent
+  );
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+}
+
+.searchForm:hover::after {
+  opacity: 1;
+  animation: searchShimmer 900ms ease forwards;
+}
+
+/* =========================================
+   CART BUTTON
+========================================= */
+
+.cartButton {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  border: 1px solid var(--nav-border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--nav-text);
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.cartButton:hover {
+  transform: translateY(-2px);
+  border-color: var(--nav-cyan);
+  background: rgba(18, 200, 245, 0.07);
+  color: var(--nav-cyan);
+}
+
+.cartButton svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =========================================
+   ACCOUNT BUTTON
+========================================= */
+
+.accountWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.accountButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 39px;
+  padding: 0 10px;
+  border: 1px solid var(--nav-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--nav-text);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.accountButton > svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 220ms ease;
+}
+
+.accountButton:hover,
+.accountButtonActive {
+  color: var(--nav-cyan);
+  border-color: rgba(18, 200, 245, 0.65);
+  background: rgba(18, 200, 245, 0.08);
+  box-shadow: 0 0 18px rgba(18, 200, 245, 0.08);
+}
+
+.accountButton:hover > svg {
+  transform: translateY(-2px);
+}
+
+.accountChevron {
+  display: inline-block;
+  color: var(--nav-muted);
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 220ms ease;
+}
+
+.accountChevronOpen {
+  transform: rotate(180deg);
+}
+
+/* =========================================
+   ACCOUNT DROPDOWN
+========================================= */
+
+.accountDropdown {
+  position: absolute;
+  top: calc(100% + 13px);
+  right: 0;
+  z-index: 1002;
+  width: min(310px, calc(100vw - 24px));
+  padding: 13px;
+  overflow: hidden;
+  border: 1px solid var(--nav-border);
+  border-radius: 16px;
+  background: var(--nav-panel);
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(18, 200, 245, 0.045);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(9px) scale(0.98);
+  transform-origin: top right;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    visibility 200ms ease;
+}
+
+.accountDropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.accountDropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 6px 13px;
+}
+
+.accountAvatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1px solid rgba(18, 200, 245, 0.35);
+  border-radius: 13px;
+  background: linear-gradient(
+    135deg,
+    rgba(18, 200, 245, 0.18),
+    rgba(7, 137, 238, 0.08)
+  );
+  color: var(--nav-cyan);
+}
+
+.accountAvatar svg {
+  width: 23px;
+  height: 23px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.accountDropdownHeader > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.accountDropdownHeader strong {
+  color: var(--nav-text);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.accountDropdownHeader > div > span {
+  color: var(--nav-muted);
+  font-size: 11px;
+}
+
+.accountDivider {
+  height: 1px;
+  margin: 0 0 8px;
+  background: var(--nav-border);
+}
+
+/* ACCOUNT MENU ITEMS */
+
+.accountMenuLink {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 60px;
+  padding: 9px 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--nav-text);
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.accountMenuLink:hover {
+  border-color: rgba(18, 200, 245, 0.16);
+  background: rgba(18, 200, 245, 0.075);
+  transform: translateX(3px);
+}
+
+.accountMenuIcon {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  flex: 0 0 37px;
+  border: 1px solid var(--nav-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--nav-cyan);
+}
+
+.accountMenuIcon svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.accountMenuText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.accountMenuText strong {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.accountMenuText small {
+  color: var(--nav-muted);
+  font-size: 10px;
+}
+
+.accountMenuArrow {
+  color: var(--nav-cyan);
+  font-size: 15px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.accountMenuLink:hover .accountMenuArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.accountSignup {
+  background: rgba(18, 200, 245, 0.045);
+}
+
+.accountSignup .accountMenuIcon {
+  border-color: rgba(18, 200, 245, 0.22);
+  background: rgba(18, 200, 245, 0.08);
+}
+
+/* =========================================
+   QUOTE BUTTON
+========================================= */
+
+.quoteButton,
+.mobileQuote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 39px;
+  padding: 0 14px;
+  border: 1px solid rgba(18, 200, 245, 0.7);
+  border-radius: 25px;
+  background: linear-gradient(115deg, #16d1f5, #0789ee);
+  color: #031523;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(18, 200, 245, 0.1);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.quoteButton:hover,
+.mobileQuote:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 22px rgba(18, 200, 245, 0.23);
+}
+
+.quoteButton span,
+.mobileQuote span {
+  font-size: 15px;
+}
+
+/* =========================================
+   MOBILE-ONLY ELEMENTS
+========================================= */
+
+.menuToggle,
+.mobileQuote,
+.backdrop,
+.mobileAccountLinks {
+  display: none;
+}
+
+/* =========================================
+   LAPTOP: 961px TO 1200px
+========================================= */
+
+@media (min-width: 961px) and (max-width: 1200px) {
+  .container {
+    width: calc(100% - 28px);
+    gap: 9px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .logoMark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .brandName {
+    font-size: 12px;
+  }
+
+  .brandSubtitle {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+
+  .navigation {
+    gap: 7px;
+  }
+
+  .navLink {
+    font-size: 11px;
+  }
+
+  .dropdownToggle {
+    width: 15px;
+    flex-basis: 15px;
+  }
+
+  .actions {
+    gap: 5px;
+  }
+
+  .searchForm {
+    width: 100px;
+  }
+
+  .accountButton {
+    gap: 4px;
+    padding-inline: 7px;
+    font-size: 10px;
+  }
+
+  .quoteButton {
+    gap: 5px;
+    padding-inline: 9px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   TABLETS AND MOBILE
+========================================= */
+
+@media (max-width: 960px) {
+  .container {
+    width: calc(100% - 32px);
+    min-height: 76px;
+    gap: 10px;
+  }
+
+  .logoMark {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .brandName {
+    font-size: 14px;
+  }
+
+  .brandSubtitle {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  /* MOBILE NAVIGATION */
+
+  .navigation {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: calc(100dvh - 76px);
+    padding: 10px 20px 22px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--nav-border);
+    border-top: 0;
+    border-radius: 0 0 14px 14px;
+    background: var(--nav-bg);
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-7px);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease,
+      visibility 180ms ease;
+  }
+
+  .navigationOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: 1px solid var(--nav-border);
+  }
+
+  .navLinkRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+  }
+
+  .navLink {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .dropdownToggle {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    margin-left: 8px;
+  }
+
+  .dropdown {
+    position: static;
+    display: none;
+    width: 100%;
+    max-height: none;
+    padding: 4px 0 12px 10px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .dropdownOpen {
+    display: flex;
+  }
+
+  .dropdownHeading {
+    padding: 10px;
+  }
+
+  .dropdownLink {
+    min-height: 44px;
+    font-size: 13px;
+  }
+
+  .dropdownFooter {
+    min-height: 44px;
+  }
+
+  .quoteButton {
+    display: none;
+  }
+
+  .mobileQuote {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 18px;
+    padding-inline: 20px;
+    min-height: 44px;
+  }
+
+  /* MOBILE ACCOUNT LINKS */
+
+  .mobileAccountLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 1px solid var(--nav-border);
+  }
+
+  .mobileAccountHeading {
+    padding: 4px 2px 7px;
+    color: var(--nav-cyan);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .mobileAccountLink {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 45px;
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--nav-text);
+    font-size: 13px;
+    text-decoration: none;
+    transition:
+      color 180ms ease,
+      background 180ms ease;
+  }
+
+  .mobileAccountLink:hover {
+    color: var(--nav-cyan);
+    background: rgba(18, 200, 245, 0.07);
+  }
+
+  .mobileAccountLink svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* MENU BUTTON */
+
+  .menuToggle {
+    position: relative;
+    z-index: 11;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    padding: 0;
+    border: 1px solid rgba(18, 200, 245, 0.7);
+    border-radius: 11px;
+    background: rgba(18, 200, 245, 0.04);
+    color: var(--nav-text);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .menuToggle:hover {
+    background: rgba(18, 200, 245, 0.1);
+  }
+
+  .menuToggle:active {
+    transform: scale(0.96);
+  }
+
+  .menuToggle svg {
+    width: 23px;
+    height: 23px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* BACKDROP */
+
+  .backdrop {
+    position: fixed;
+    inset: 76px 0 0;
+    z-index: 4;
+    display: block;
+    width: 100%;
+    height: calc(100dvh - 76px);
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.4);
+    cursor: default;
+    touch-action: manipulation;
+  }
+
+  /* TABLET SEARCH */
+
+  .searchForm {
+    width: 145px;
+  }
+
+  /* TABLET ACCOUNT */
+
+  .accountButton {
+    width: 39px;
+    height: 39px;
+    min-height: 39px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .accountLabel,
+  .accountChevron {
+    display: none;
+  }
+
+  .accountButton > svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* =========================================
+   MOBILE: MAX 640px
+========================================= */
+
+@media (max-width: 640px) {
+  .container {
+    width: calc(100% - 24px);
+    min-height: 74px;
+    gap: 6px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .logoMark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .brandName {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+
+  .brandSubtitle {
+    font-size: 8px;
+    letter-spacing: 0.65px;
+  }
+
+  .actions {
+    gap: 3px;
+  }
+
+  /* COLLAPSED SEARCH */
+
+  .searchForm {
+    width: 38px;
+    height: 40px;
+    padding-left: 0;
+    overflow: hidden;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .searchForm:hover {
+    border-color: transparent;
+  }
+
+  .searchForm input {
+    display: block;
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .searchForm .searchButton {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* EXPANDED MOBILE SEARCH */
+
+  .searchForm.searchExpanded {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    z-index: 12;
+    width: auto;
+    height: 46px;
+    padding-left: 12px;
+    overflow: hidden;
+    border-color: rgba(18, 200, 245, 0.7);
+    border-radius: 14px;
+    background: var(--nav-panel);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+    animation: searchPanelEnter 260ms
+      cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .searchForm.searchExpanded input {
+    width: 100%;
+    min-width: 0;
+    opacity: 1;
+    pointer-events: auto;
+    animation: searchInputEnter 220ms ease both;
+  }
+
+  .searchForm.searchExpanded .searchButton {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* CART */
+
+  .cartButton {
+    width: 36px;
+    height: 38px;
+    flex-basis: 36px;
+  }
+
+  /* ACCOUNT */
+
+  .accountButton {
+    width: 36px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    border-color: transparent;
+    background: transparent;
+    border-radius: 50%;
+  }
+
+  .accountButton > svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .accountLabel,
+  .accountChevron {
+    display: none;
+  }
+
+  .accountDropdown {
+    top: calc(100% + 10px);
+    right: -44px;
+    width: min(290px, calc(100vw - 24px));
+  }
+
+  /* MENU */
+
+  .menuToggle {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .navigation {
+    max-height: calc(100dvh - 74px);
+  }
+
+  .backdrop {
+    inset-block-start: 74px;
+    height: calc(100dvh - 74px);
+  }
+}
+
+/* =========================================
+   VERY SMALL PHONES: MAX 380px
+========================================= */
+
+@media (max-width: 380px) {
+  .container {
+    width: calc(100% - 16px);
+    gap: 3px;
+  }
+
+  .brand {
+    gap: 5px;
+  }
+
+  .logoMark {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+  }
+
+  .brandName {
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .brandSubtitle {
+    font-size: 7px;
+    letter-spacing: 0.35px;
+  }
+
+  .actions {
+    gap: 1px;
+  }
+
+  .searchForm {
+    width: 31px;
+    height: 36px;
+  }
+
+  .searchButton {
+    width: 31px;
+    height: 32px;
+    flex-basis: 31px;
+  }
+
+  .searchButton svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .searchForm.searchExpanded {
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 42px;
+    padding-left: 10px;
+  }
+
+  .searchForm.searchExpanded .searchButton {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .cartButton {
+    width: 32px;
+    height: 34px;
+    flex-basis: 32px;
+  }
+
+  .cartButton svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .accountButton {
+    width: 31px;
+    height: 34px;
+    min-height: 34px;
+  }
+
+  .accountButton > svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .accountDropdown {
+    right: -38px;
+  }
+
+  .menuToggle {
+    width: 34px;
+    height: 36px;
+    flex-basis: 34px;
+  }
+
+  .menuToggle svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.brand:focus-visible,
+.navLink:focus-visible,
+.dropdownLink:focus-visible,
+.dropdownFooter:focus-visible,
+.cartButton:focus-visible,
+.quoteButton:focus-visible,
+.mobileQuote:focus-visible,
+.menuToggle:focus-visible,
+.dropdownToggle:focus-visible,
+.searchButton:focus-visible,
+.accountButton:focus-visible,
+.accountMenuLink:focus-visible,
+.mobileAccountLink:focus-visible {
+  outline: 2px solid var(--nav-cyan);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header *,
+  .header *::before,
+  .header *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

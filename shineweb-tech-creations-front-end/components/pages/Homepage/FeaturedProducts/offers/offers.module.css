@@ -1,0 +1,496 @@
+.page {
+  min-height: 100vh;
+  padding: 42px 0 70px;
+  color: #eaf2ff;
+  background:
+    radial-gradient(ellipse at 5% 0%, rgba(0, 150, 255, 0.12), transparent 35%),
+    #071321;
+}
+
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.header,
+.sectionHeading,
+.listHeading,
+.offerItemTop,
+.formActions,
+.itemActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.eyebrow,
+.sectionLabel {
+  color: #46dafa;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+}
+
+.header h1 {
+  margin: 10px 0;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.045em;
+}
+
+.header p {
+  margin: 0;
+  color: #9db1c8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.backLink {
+  flex: 0 0 auto;
+  padding: 11px 15px;
+  border: 1px solid rgba(66, 218, 250, 0.35);
+  border-radius: 8px;
+  color: #c8f8ff;
+  background: rgba(37, 217, 245, 0.06);
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.editor,
+.listSection {
+  margin-top: 22px;
+  padding: clamp(17px, 3vw, 28px);
+  border: 1px solid rgba(157, 190, 222, 0.16);
+  border-radius: 15px;
+  background: rgba(11, 30, 49, 0.86);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+}
+
+.sectionHeading,
+.listHeading {
+  margin-bottom: 24px;
+}
+
+.sectionHeading h2,
+.listHeading h2 {
+  margin: 7px 0 0;
+  font-size: 22px;
+  letter-spacing: -0.035em;
+}
+
+.listHeading h2 span {
+  color: #8ea6bf;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field > span {
+  color: #dce8f5;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.field input,
+.field textarea,
+.search input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  border: 1px solid rgba(154, 187, 218, 0.22);
+  border-radius: 8px;
+  outline: none;
+  color: #f2f8ff;
+  background: #081827;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+.search input::placeholder {
+  color: #667f99;
+}
+
+.field input:focus,
+.field textarea:focus,
+.search input:focus {
+  border-color: #25cbed;
+  box-shadow: 0 0 0 3px rgba(37, 203, 237, 0.1);
+}
+
+.field small {
+  color: #829ab2;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 23px;
+  padding: 14px;
+  border: 1px solid rgba(157, 190, 222, 0.13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+}
+
+.checkboxRow input {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  accent-color: #20c8ec;
+}
+
+.checkboxRow span {
+  display: grid;
+  gap: 4px;
+}
+
+.checkboxRow strong {
+  font-size: 12px;
+}
+
+.checkboxRow small {
+  color: #8ea5bd;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.formActions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.primaryButton,
+.secondaryButton,
+.deleteButton {
+  display: inline-flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.primaryButton {
+  color: #041827;
+  background: linear-gradient(110deg, #61e8fb, #25b9f4);
+}
+
+.primaryButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #82efff;
+}
+
+.secondaryButton {
+  border-color: rgba(157, 190, 222, 0.2);
+  color: #d8e7f5;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.secondaryButton:hover:not(:disabled) {
+  border-color: rgba(37, 217, 245, 0.5);
+  background: rgba(37, 217, 245, 0.08);
+}
+
+.deleteButton {
+  border-color: rgba(251, 113, 133, 0.25);
+  color: #ffb2bf;
+  background: rgba(244, 63, 94, 0.08);
+}
+
+.deleteButton:hover {
+  border-color: rgba(251, 113, 133, 0.55);
+  background: rgba(244, 63, 94, 0.16);
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding-left: 12px;
+  border: 1px solid rgba(154, 187, 218, 0.18);
+  border-radius: 9px;
+  color: #71def3;
+  background: #081827;
+}
+
+.search input {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.offerList {
+  display: grid;
+  gap: 12px;
+}
+
+.offerItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 19px;
+  border: 1px solid rgba(157, 190, 222, 0.14);
+  border-radius: 11px;
+  background: linear-gradient(130deg, #0b2033, #0a1929);
+}
+
+.offerItemMain {
+  min-width: 0;
+  flex: 1;
+}
+
+.offerEyebrow {
+  color: #64dff5;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  overflow-wrap: anywhere;
+}
+
+.status {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.statusActive {
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  color: #78edc2;
+  background: rgba(16, 185, 129, 0.09);
+}
+
+.statusInactive {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #a9b6c5;
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.offerItem h3 {
+  margin: 14px 0 8px;
+  color: #f1f7ff;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.offerItem h3 span {
+  color: #4bdcf5;
+}
+
+.offerItem p {
+  margin: 0;
+  color: #9db2c7;
+  font-size: 12px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.featureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 13px;
+}
+
+.featureList span {
+  padding: 5px 8px;
+  border: 1px solid rgba(37, 217, 245, 0.15);
+  border-radius: 5px;
+  color: #b8d4e8;
+  background: rgba(37, 217, 245, 0.04);
+  font-size: 10px;
+}
+
+.priority {
+  display: inline-block;
+  margin-top: 13px;
+  color: #839ab1;
+  font-size: 10px;
+}
+
+.itemActions {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.emptyState {
+  padding: 35px 16px;
+  border: 1px dashed rgba(157, 190, 222, 0.2);
+  border-radius: 10px;
+  color: #9db2c7;
+  font-size: 12px;
+  text-align: center;
+}
+
+.error,
+.success {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 15px 0;
+  padding: 13px 15px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.error {
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  color: #ffc0ca;
+  background: rgba(244, 63, 94, 0.08);
+}
+
+.success {
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  color: #91f2cb;
+  background: rgba(16, 185, 129, 0.07);
+}
+
+.error button,
+.success button {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.page a:focus-visible,
+.page button:focus-visible,
+.page input:focus-visible,
+.page textarea:focus-visible {
+  outline: 2px solid #61e8fb;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-top: 26px;
+  }
+
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+
+  .offerItem {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .itemActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .listHeading,
+  .sectionHeading {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    width: calc(100% - 20px);
+  }
+
+  .editor,
+  .listSection {
+    padding: 14px;
+  }
+
+  .sectionHeading h2,
+  .listHeading h2 {
+    font-size: 19px;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .deleteButton {
+    padding-inline: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
