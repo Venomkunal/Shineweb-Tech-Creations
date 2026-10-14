@@ -74,7 +74,7 @@ export async function getBlogs(
   if (category) params.set("category", category);
 
   const response = await fetch(
-    `${API_URL}/blogs?${params.toString()}`,
+    `${API_URL}/api/blogs?${params.toString()}`,
     {
       next: { revalidate: 60, tags: ["blogs"] },
     }
@@ -88,7 +88,7 @@ export async function getBlogBySlug(
   slug: string
 ): Promise<BlogPost | null> {
   const response = await fetch(
-    `${API_URL}/blogs/${encodeURIComponent(slug)}`,
+    `${API_URL}/api/blogs/${encodeURIComponent(slug)}`,
     { next: { revalidate: 60, tags: ["blogs", `blog-${slug}`] } }
   );
 
@@ -102,7 +102,7 @@ export async function getBlogBySlug(
 
 // ADMIN: fetch all articles, including drafts
 export async function getAdminBlogs(token: string) {
-  const response = await fetch(`${API_URL}/blogs/admin/all`, {
+  const response = await fetch(`${API_URL}/api/blogs/admin/all`, {
     headers: { Authorization: `Bearer ${token}` },
     cache: "no-store",
   });
@@ -116,7 +116,7 @@ export async function createBlog(
   token: string,
   input: BlogInput
 ): Promise<BlogPost> {
-  const response = await fetch(`${API_URL}/blogs`, {
+  const response = await fetch(`${API_URL}/api/blogs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -138,7 +138,7 @@ export async function updateBlog(
   input: Partial<BlogInput>
 ): Promise<BlogPost> {
   const response = await fetch(
-    `${API_URL}/blogs/${encodeURIComponent(id)}`,
+    `${API_URL}/api/blogs/${encodeURIComponent(id)}`,
     {
       method: "PATCH",
       headers: {
@@ -161,7 +161,7 @@ export async function deleteBlog(
   id: string
 ): Promise<void> {
   const response = await fetch(
-    `${API_URL}/blogs/${encodeURIComponent(id)}`,
+    `${API_URL}/api/blogs/${encodeURIComponent(id)}`,
     {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },

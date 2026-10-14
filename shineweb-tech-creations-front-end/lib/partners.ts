@@ -59,12 +59,12 @@ async function request<T>(
 
 // Public: homepage
 export function getPartners(): Promise<Partner[]> {
-  return request<Partner[]>("/partners");
+  return request<Partner[]>("api/partners");
 }
 
 // Admin: read all partners
 export function getAdminPartners(token: string): Promise<Partner[]> {
-  return request<Partner[]>("/partners/admin", {}, token);
+  return request<Partner[]>("/api/partners/admin", {}, token);
 }
 
 // Admin: create
@@ -73,7 +73,7 @@ export function createPartner(
   token: string
 ): Promise<Partner> {
   return request<Partner>(
-    "/partners",
+    "/api/partners",
     { method: "POST", body: JSON.stringify(input) },
     token
   );
@@ -86,7 +86,7 @@ export function updatePartner(
   token: string
 ): Promise<Partner> {
   return request<Partner>(
-    `/partners/${encodeURIComponent(id)}`,
+    `/api/partners/${encodeURIComponent(id)}`,
     { method: "PATCH", body: JSON.stringify(input) },
     token
   );
@@ -95,7 +95,7 @@ export function updatePartner(
 // Admin: delete
 export function deletePartner(id: string, token: string): Promise<void> {
   return request<void>(
-    `/partners/${encodeURIComponent(id)}`,
+    `/api/partners/${encodeURIComponent(id)}`,
     { method: "DELETE" },
     token
   );

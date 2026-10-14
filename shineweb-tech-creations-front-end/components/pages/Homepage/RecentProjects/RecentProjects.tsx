@@ -356,7 +356,7 @@ export default function RecentProjects() {
 
       try {
         const response = await fetch(
-          `${API_URL}/projects`,
+          `${API_URL}/api/projects`,
           {
             method: "GET",
             headers: {
@@ -422,7 +422,7 @@ export default function RecentProjects() {
   /* Resolve project URL */
 
   function getProjectHref(project: Project): string {
-    return project.href || `/projects/${project.slug}`;
+    return project.href || `/api/projects/${project.slug}`;
   }
 
   return (

@@ -72,7 +72,7 @@ async function request<T>(
 
 // Public: published testimonials only
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const result = await request<Testimonial[]>("/testimonials");
+  const result = await request<Testimonial[]>("/api/testimonials");
   return result.data;
 }
 
@@ -81,7 +81,7 @@ export async function getAllTestimonials(
   token: string
 ): Promise<Testimonial[]> {
   const result = await request<Testimonial[]>(
-    "/testimonials/admin",
+    "/api/testimonials/admin",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -96,7 +96,7 @@ export async function createTestimonial(
   data: TestimonialInput,
   token: string
 ): Promise<Testimonial> {
-  const result = await request<Testimonial>("/testimonials", {
+  const result = await request<Testimonial>("/api/testimonials", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ export async function updateTestimonial(
   token: string
 ): Promise<Testimonial> {
   const result = await request<Testimonial>(
-    `/testimonials/${encodeURIComponent(id)}`,
+    `/api/testimonials/${encodeURIComponent(id)}`,
     {
       method: "PUT",
       headers: {
@@ -131,7 +131,7 @@ export async function deleteTestimonial(
   token: string
 ): Promise<void> {
   await request<null>(
-    `/testimonials/${encodeURIComponent(id)}`,
+    `/api/testimonials/${encodeURIComponent(id)}`,
     {
       method: "DELETE",
       headers: {
