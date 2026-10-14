@@ -37,7 +37,7 @@ export default function Testimonials() {
         }
 
         const response = await fetch(
-          `${apiUrl.replace(/\/+$/, "")}/testimonials`,
+          `${apiUrl.replace(/\/+$/, "")}/api/testimonials`,
           { signal: controller.signal, cache: "no-store" }
         );
 

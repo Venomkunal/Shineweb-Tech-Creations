@@ -59,7 +59,7 @@ async function request<T>(
 
 // Public: homepage
 export function getPartners(): Promise<Partner[]> {
-  return request<Partner[]>("api/partners");
+  return request<Partner[]>("/api/partners");
 }
 
 // Admin: read all partners
