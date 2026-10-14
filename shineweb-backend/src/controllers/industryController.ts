@@ -1,7 +1,7 @@
 
 import type { Request, Response } from "express";
 import mongoose from "mongoose";
-import Industry from "../models/industry";
+import Industry from "../models/Industry";
 
 // CREATE INDUSTRY
 export const createIndustry = async (
