@@ -24,6 +24,7 @@ import {
   Tag,
 } from "lucide-react";
 import styles from "./FeaturedProducts.module.css";
+import ProductSkeleton from "./ProductSkeleton";
 
 const API_URL = (
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
@@ -242,7 +243,7 @@ function safeOfferLink(value: string): string {
 
     if (url.protocol === "https:") return url.toString();
   } catch {
-    // Use the contact page for invalid links.
+    // Fall back to the contact page.
   }
 
   return "/contact";
@@ -262,7 +263,7 @@ function safeImageUrl(value: string): string {
       return url.toString();
     }
   } catch {
-    // Use the fallback image.
+    // Fall back to the placeholder.
   }
 
   return PLACEHOLDER_IMAGE;
@@ -270,6 +271,7 @@ function safeImageUrl(value: string): string {
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [randomProducts, setRandomProducts] = useState<Product[]>([]);
   const [offers, setOffers] = useState<Offer[]>([]);
 
   const [activeCategory, setActiveCategory] =
@@ -286,7 +288,6 @@ export default function FeaturedProducts() {
   const [error, setError] = useState("");
   const [offerError, setOfferError] = useState("");
 
-  const [productPage, setProductPage] = useState(0);
   const [failedImages, setFailedImages] = useState<string[]>([]);
 
   const loadProducts = useCallback(async () => {
@@ -295,12 +296,14 @@ export default function FeaturedProducts() {
 
     try {
       const response = await fetch(
-        `${API_URL}/api/products/featured?limit=24`,
+        `${API_URL}/api/products/featured?limit=100`,
         { cache: "no-store" }
       );
 
       if (!response.ok) {
-        throw new Error(`Unable to load products (${response.status}).`);
+        throw new Error(
+          `Unable to load products (${response.status}).`
+        );
       }
 
       const result: unknown = await response.json();
@@ -309,9 +312,11 @@ export default function FeaturedProducts() {
         .map(normalizeProduct)
         .filter((item): item is Product => item !== null);
 
-      setProducts(shuffleProducts(normalized));
+      setProducts(normalized);
+      setRandomProducts(
+        shuffleProducts(normalized).slice(0, PAGE_SIZE)
+      );
       setFailedImages([]);
-      setProductPage(0);
     } catch (err) {
       setError(
         err instanceof Error
@@ -358,7 +363,6 @@ export default function FeaturedProducts() {
     void loadOffers();
   }, [loadProducts, loadOffers]);
 
-  // Automatic offer sliding.
   useEffect(() => {
     if (offers.length <= 1 || isOfferPaused) return;
 
@@ -369,7 +373,6 @@ export default function FeaturedProducts() {
     return () => window.clearInterval(timer);
   }, [offers.length, isOfferPaused]);
 
-  // Keep the index within the available offers.
   useEffect(() => {
     setOfferIndex((current) =>
       offers.length > 0 ? current % offers.length : 0
@@ -377,28 +380,20 @@ export default function FeaturedProducts() {
   }, [offers.length]);
 
   const filteredProducts = useMemo(() => {
-    if (activeCategory === "All Products") return products;
+    if (activeCategory === "All Products") {
+      return randomProducts;
+    }
 
-    return products.filter(
+    return randomProducts.filter(
       (product) => product.category === activeCategory
     );
-  }, [activeCategory, products]);
+  }, [activeCategory, randomProducts]);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredProducts.length / PAGE_SIZE)
-  );
-
-  const visibleProducts = filteredProducts.slice(
-    productPage * PAGE_SIZE,
-    productPage * PAGE_SIZE + PAGE_SIZE
-  );
-
+  const visibleProducts = filteredProducts;
   const activeOffer = offers[offerIndex];
 
   const selectCategory = (category: Category) => {
     setActiveCategory(category);
-    setProductPage(0);
   };
 
   const previousOffer = () => {
@@ -502,7 +497,7 @@ export default function FeaturedProducts() {
 
           <div className={styles.resultCount} aria-live="polite">
             <span className={styles.countNumber}>
-              {filteredProducts.length}
+              {loading ? PAGE_SIZE : filteredProducts.length}
             </span>{" "}
             products
           </div>
@@ -511,12 +506,17 @@ export default function FeaturedProducts() {
         <div className={styles.productLayout}>
           <div className={styles.productsArea}>
             {loading ? (
-              <div className={styles.loader} role="status">
-                <LoaderCircle
-                  size={30}
-                  className={styles.spin}
-                />
-                <p>Loading products...</p>
+              <div
+                className={styles.productGrid}
+                role="status"
+                aria-label="Loading featured products"
+              >
+                {Array.from({ length: PAGE_SIZE }, (_, index) => (
+                  <ProductSkeleton key={index} index={index} />
+                ))}
+                <span className={styles.srOnly}>
+                  Loading featured products...
+                </span>
               </div>
             ) : error ? (
               <div className={styles.emptyState}>
@@ -537,7 +537,7 @@ export default function FeaturedProducts() {
                 <PackageOpen size={38} />
                 <h3>No products found</h3>
                 <p>
-                  There are no products in this category right now.
+                  There are no selected products in this category.
                 </p>
 
                 <button
@@ -549,210 +549,169 @@ export default function FeaturedProducts() {
                 </button>
               </div>
             ) : (
-              <>
-                <div className={styles.productGrid}>
-                  {visibleProducts.map((product, index) => {
-                    const isFavorite = favorites.includes(product.id);
-                    const isAdded = cart.includes(product.id);
+              <div className={styles.productGrid}>
+                {visibleProducts.map((product, index) => {
+                  const isFavorite = favorites.includes(product.id);
+                  const isAdded = cart.includes(product.id);
 
-                    const imageSrc = failedImages.includes(product.id)
-                      ? PLACEHOLDER_IMAGE
-                      : safeImageUrl(product.image);
+                  const imageSrc = failedImages.includes(product.id)
+                    ? PLACEHOLDER_IMAGE
+                    : safeImageUrl(product.image);
 
-                    return (
-                      <article
-                        className={styles.productCard}
-                        key={product.id}
-                        style={
-                          {
-                            "--card-index": index,
-                          } as CSSProperties
-                        }
-                      >
-                        <div className={styles.imageArea}>
-                          {product.badge && (
-                            <span className={styles.productBadge}>
-                              {product.badge}
+                  return (
+                    <article
+                      className={styles.productCard}
+                      key={product.id}
+                      style={
+                        {
+                          "--card-index": index,
+                        } as CSSProperties
+                      }
+                    >
+                      <div className={styles.imageArea}>
+                        {product.badge && (
+                          <span className={styles.productBadge}>
+                            {product.badge}
+                          </span>
+                        )}
+
+                        <button
+                          type="button"
+                          className={`${styles.favorite} ${
+                            isFavorite ? styles.isFavorite : ""
+                          }`}
+                          onClick={() => toggleFavorite(product.id)}
+                          aria-label={
+                            isFavorite
+                              ? `Remove ${product.name} from favorites`
+                              : `Add ${product.name} to favorites`
+                          }
+                          aria-pressed={isFavorite}
+                        >
+                          <Heart
+                            size={17}
+                            fill={isFavorite ? "currentColor" : "none"}
+                          />
+                        </button>
+
+                        <Link
+                          href={`/products/${encodeURIComponent(product.slug)}`}
+                          className={styles.imageLink}
+                          aria-label={`View ${product.name}`}
+                        >
+                          <Image
+                            src={imageSrc}
+                            alt={product.name}
+                            width={360}
+                            height={260}
+                            className={styles.productImage}
+                            unoptimized
+                            onError={() => {
+                              setFailedImages((current) =>
+                                current.includes(product.id)
+                                  ? current
+                                  : [...current, product.id]
+                              );
+                            }}
+                          />
+                        </Link>
+
+                        <span className={styles.imageHint}>
+                          <ArrowUpRight size={14} />
+                          View product
+                        </span>
+                      </div>
+
+                      <div className={styles.productInfo}>
+                        <span className={styles.productCategory}>
+                          {product.category}
+                        </span>
+
+                        <Link
+                          href={`/products/${encodeURIComponent(product.slug)}`}
+                          className={styles.productName}
+                        >
+                          {product.name}
+                        </Link>
+
+                        {product.description && (
+                          <p className={styles.productDescription}>
+                            {product.description}
+                          </p>
+                        )}
+
+                        {product.rating > 0 && (
+                          <div
+                            className={styles.rating}
+                            aria-label={`Rating ${product.rating} out of 5`}
+                          >
+                            <span className={styles.stars}>
+                              {Array.from(
+                                { length: 5 },
+                                (_, starIndex) => (
+                                  <Star
+                                    key={starIndex}
+                                    size={12}
+                                    fill={
+                                      starIndex <
+                                      Math.round(product.rating)
+                                        ? "currentColor"
+                                        : "none"
+                                    }
+                                  />
+                                )
+                              )}
                             </span>
-                          )}
+
+                            <span className={styles.ratingValue}>
+                              {product.rating.toFixed(1)}
+                            </span>
+
+                            <span className={styles.reviews}>
+                              ({product.reviews})
+                            </span>
+                          </div>
+                        )}
+
+                        <div className={styles.priceRow}>
+                          <div className={styles.priceGroup}>
+                            <span className={styles.price}>
+                              {formatPrice(product.price)}
+                            </span>
+
+                            {product.oldPrice !== undefined &&
+                              product.oldPrice > product.price && (
+                                <span className={styles.oldPrice}>
+                                  {formatPrice(product.oldPrice)}
+                                </span>
+                              )}
+                          </div>
 
                           <button
                             type="button"
-                            className={`${styles.favorite} ${
-                              isFavorite ? styles.isFavorite : ""
+                            className={`${styles.addToCart} ${
+                              isAdded ? styles.addedToCart : ""
                             }`}
-                            onClick={() => toggleFavorite(product.id)}
+                            onClick={() => toggleCart(product.id)}
                             aria-label={
-                              isFavorite
-                                ? `Remove ${product.name} from favorites`
-                                : `Add ${product.name} to favorites`
+                              isAdded
+                                ? `Remove ${product.name} from selection`
+                                : `Add ${product.name} to selection`
                             }
-                            aria-pressed={isFavorite}
+                            aria-pressed={isAdded}
                           >
-                            <Heart
-                              size={17}
-                              fill={
-                                isFavorite ? "currentColor" : "none"
-                              }
-                            />
+                            {isAdded ? (
+                              <Check size={17} />
+                            ) : (
+                              <ShoppingCart size={17} />
+                            )}
                           </button>
-
-                          <Link
-                            href={`/products/${encodeURIComponent(product.slug)}`}
-                            className={styles.imageLink}
-                            aria-label={`View ${product.name}`}
-                          >
-                            <Image
-                              src={imageSrc}
-                              alt={product.name}
-                              width={360}
-                              height={260}
-                              className={styles.productImage}
-                              unoptimized
-                              onError={() => {
-                                setFailedImages((current) =>
-                                  current.includes(product.id)
-                                    ? current
-                                    : [...current, product.id]
-                                );
-                              }}
-                            />
-                          </Link>
-
-                          <span className={styles.imageHint}>
-                            <ArrowUpRight size={14} />
-                            View product
-                          </span>
                         </div>
-
-                        <div className={styles.productInfo}>
-                          <span className={styles.productCategory}>
-                            {product.category}
-                          </span>
-
-                          <Link
-                            href={`/products/${encodeURIComponent(product.slug)}`}
-                            className={styles.productName}
-                          >
-                            {product.name}
-                          </Link>
-
-                          {product.description && (
-                            <p className={styles.productDescription}>
-                              {product.description}
-                            </p>
-                          )}
-
-                          {product.rating > 0 && (
-                            <div
-                              className={styles.rating}
-                              aria-label={`Rating ${product.rating} out of 5`}
-                            >
-                              <span className={styles.stars}>
-                                {Array.from(
-                                  { length: 5 },
-                                  (_, starIndex) => (
-                                    <Star
-                                      key={starIndex}
-                                      size={12}
-                                      fill={
-                                        starIndex <
-                                        Math.round(product.rating)
-                                          ? "currentColor"
-                                          : "none"
-                                      }
-                                    />
-                                  )
-                                )}
-                              </span>
-
-                              <span className={styles.ratingValue}>
-                                {product.rating.toFixed(1)}
-                              </span>
-
-                              <span className={styles.reviews}>
-                                ({product.reviews})
-                              </span>
-                            </div>
-                          )}
-
-                          <div className={styles.priceRow}>
-                            <div className={styles.priceGroup}>
-                              <span className={styles.price}>
-                                {formatPrice(product.price)}
-                              </span>
-
-                              {product.oldPrice !== undefined &&
-                                product.oldPrice > product.price && (
-                                  <span className={styles.oldPrice}>
-                                    {formatPrice(product.oldPrice)}
-                                  </span>
-                                )}
-                            </div>
-
-                            <button
-                              type="button"
-                              className={`${styles.addToCart} ${
-                                isAdded ? styles.addedToCart : ""
-                              }`}
-                              onClick={() => toggleCart(product.id)}
-                              aria-label={
-                                isAdded
-                                  ? `Remove ${product.name} from selection`
-                                  : `Add ${product.name} to selection`
-                              }
-                              aria-pressed={isAdded}
-                            >
-                              {isAdded ? (
-                                <Check size={17} />
-                              ) : (
-                                <ShoppingCart size={17} />
-                              )}
-                            </button>
-                          </div>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-
-                {filteredProducts.length > PAGE_SIZE && (
-                  <nav
-                    className={styles.productPagination}
-                    aria-label="Product pagination"
-                  >
-                    <button
-                      type="button"
-                      className={styles.pageArrow}
-                      onClick={() =>
-                        setProductPage((page) => Math.max(0, page - 1))
-                      }
-                      disabled={productPage === 0}
-                      aria-label="Previous products"
-                    >
-                      <ArrowLeft size={17} />
-                    </button>
-
-                    <span>
-                      Page {productPage + 1} of {totalPages}
-                    </span>
-
-                    <button
-                      type="button"
-                      className={styles.pageArrow}
-                      onClick={() =>
-                        setProductPage((page) =>
-                          Math.min(totalPages - 1, page + 1)
-                        )
-                      }
-                      disabled={productPage >= totalPages - 1}
-                      aria-label="Next products"
-                    >
-                      <ArrowRight size={17} />
-                    </button>
-                  </nav>
-                )}
-              </>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             )}
           </div>
 

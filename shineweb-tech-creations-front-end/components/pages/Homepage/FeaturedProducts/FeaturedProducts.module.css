@@ -1552,3 +1552,147 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================================
+   PRODUCT SKELETON LOADING UI
+   ========================================= */
+
+.skeletonCard {
+  pointer-events: none;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 7px;
+  background: rgba(145, 165, 188, 0.09);
+  isolation: isolate;
+}
+
+.skeleton::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    rgba(120, 207, 237, 0.10) 35%,
+    rgba(120, 207, 237, 0.21) 50%,
+    rgba(120, 207, 237, 0.10) 65%,
+    transparent 85%
+  );
+  content: "";
+  transform: translateX(-100%);
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonImage {
+  width: 100%;
+  height: 100%;
+  min-height: 135px;
+  border-radius: 9px;
+}
+
+.skeletonCategory {
+  width: 38%;
+  height: 9px;
+  margin-bottom: 11px;
+}
+
+.skeletonTitle {
+  width: 88%;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.skeletonDescription {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 7px;
+}
+
+.skeletonDescriptionShort {
+  width: 65%;
+  height: 8px;
+}
+
+.skeletonPriceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 17px;
+}
+
+.skeletonPriceGroup {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skeletonPrice {
+  width: 82px;
+  max-width: 100%;
+  height: 17px;
+}
+
+.skeletonOldPrice {
+  width: 53px;
+  height: 9px;
+}
+
+.skeletonCart {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 10px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@keyframes skeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .skeletonImage {
+    min-height: 105px;
+  }
+
+  .skeletonPrice {
+    width: 58px;
+    height: 14px;
+  }
+
+  .skeletonOldPrice {
+    width: 42px;
+    height: 8px;
+  }
+
+  .skeletonCart {
+    width: 31px;
+    height: 31px;
+    flex-basis: 31px;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}

@@ -1,0 +1,967 @@
+/* ==================================================
+SHINEWEB TECH CREATIONS
+CONTACT HERO — PREMIUM TECHNOLOGY DESIGN
+================================================== */
+
+.hero {
+--hero-bg: #061321;
+--hero-panel: #0b1d30;
+--hero-cyan: #52e6f5;
+--hero-blue: #5b8cff;
+--hero-white: #f2f7ff;
+--hero-muted: #9aadc2;
+--hero-border: rgba(144, 190, 222, 0.16);
+
+position: relative;
+isolation: isolate;
+display: flex;
+flex-direction: column;
+justify-content: center;
+min-height: 650px;
+overflow: hidden;
+padding: 82px 0 30px;
+color: var(--hero-white);
+background:
+radial-gradient(
+ellipse at 80% 40%,
+rgba(22, 101, 155, 0.12),
+transparent 43%
+),
+linear-gradient(
+125deg,
+#061321 0%,
+#081827 55%,
+#071728 100%
+);
+}
+
+/* ---------------- BACKGROUND ---------------- */
+
+.heroGrid {
+position: absolute;
+z-index: -3;
+inset: 0;
+pointer-events: none;
+opacity: 0.35;
+background-image:
+linear-gradient(
+rgba(82, 230, 245, 0.055) 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+rgba(82, 230, 245, 0.055) 1px,
+transparent 1px
+);
+background-size: 52px 52px;
+mask-image: linear-gradient(
+90deg,
+transparent 0%,
+#000 30%,
+#000 80%,
+transparent 100%
+);
+}
+
+.heroGlow {
+position: absolute;
+z-index: -2;
+top: -220px;
+right: -100px;
+width: 680px;
+height: 650px;
+border-radius: 50%;
+background: rgba(30, 135, 202, 0.13);
+filter: blur(100px);
+pointer-events: none;
+animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+.heroGlowSecondary {
+position: absolute;
+z-index: -2;
+bottom: -250px;
+left: -180px;
+width: 520px;
+height: 420px;
+border-radius: 50%;
+background: rgba(41, 86, 204, 0.11);
+filter: blur(100px);
+pointer-events: none;
+}
+
+@keyframes heroGlow {
+from {
+opacity: 0.55;
+transform: scale(0.95);
+}
+
+to {
+opacity: 1;
+transform: scale(1.08);
+}
+}
+
+/* ---------------- MAIN LAYOUT ---------------- */
+
+.heroInner {
+position: relative;
+z-index: 1;
+display: grid;
+grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+align-items: center;
+gap: 44px;
+width: min(1160px, calc(100% - 48px));
+margin: 0 auto;
+}
+
+/* ---------------- CONTENT ---------------- */
+
+.heroContent {
+position: relative;
+z-index: 2;
+min-width: 0;
+max-width: 650px;
+}
+
+.eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+color: var(--hero-cyan);
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 1.7px;
+line-height: 1.7;
+}
+
+.eyebrowIcon {
+display: grid;
+place-items: center;
+flex: 0 0 auto;
+width: 30px;
+height: 30px;
+border: 1px solid rgba(82, 230, 245, 0.23);
+border-radius: 9px;
+background: rgba(82, 230, 245, 0.07);
+}
+
+.eyebrowLine {
+width: 35px;
+height: 1px;
+margin-left: 4px;
+background: linear-gradient(
+90deg,
+var(--hero-cyan),
+transparent
+);
+}
+
+.heroTitle {
+margin: 27px 0 0;
+color: var(--hero-white);
+font-size: clamp(43px, 5.15vw, 66px);
+font-weight: 800;
+letter-spacing: -2.8px;
+line-height: 1.12;
+overflow-wrap: anywhere;
+}
+
+.heroTitle > span {
+color: var(--hero-cyan);
+text-shadow: 0 0 36px rgba(82, 230, 245, 0.1);
+}
+
+.heroDescription {
+max-width: 550px;
+margin: 23px 0 0;
+color: var(--hero-muted);
+font-size: 14px;
+line-height: 1.95;
+}
+
+/* ---------------- BENEFITS ---------------- */
+
+.heroHighlights {
+display: flex;
+flex-wrap: wrap;
+gap: 11px 20px;
+margin-top: 25px;
+}
+
+.heroHighlights > span {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+color: #c5d5e5;
+font-size: 10px;
+line-height: 1.6;
+}
+
+.heroHighlights svg {
+flex: 0 0 auto;
+color: var(--hero-cyan);
+}
+
+/* ---------------- ACTIONS ---------------- */
+
+.heroActions {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 12px;
+margin-top: 32px;
+}
+
+.primaryButton,
+.secondaryButton {
+min-height: 50px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 11px;
+padding: 10px 16px;
+border: 1px solid transparent;
+border-radius: 10px;
+font-family: inherit;
+font-size: 12px;
+font-weight: 750;
+text-decoration: none;
+cursor: pointer;
+transition:
+transform 180ms ease,
+background 180ms ease,
+border-color 180ms ease,
+box-shadow 180ms ease;
+}
+
+.primaryButton {
+color: #03131d;
+background: var(--hero-cyan);
+box-shadow: 0 8px 28px rgba(82, 230, 245, 0.13);
+}
+
+.primaryButton:hover {
+background: #98f3fc;
+box-shadow: 0 12px 34px rgba(82, 230, 245, 0.21);
+transform: translateY(-2px);
+}
+
+.buttonIcon {
+display: grid;
+place-items: center;
+width: 28px;
+height: 28px;
+border-radius: 8px;
+background: rgba(3, 19, 29, 0.08);
+transition: transform 180ms ease;
+}
+
+.primaryButton:hover .buttonIcon {
+transform: translateX(3px);
+}
+
+.secondaryButton {
+color: var(--hero-white);
+border-color: var(--hero-border);
+background: rgba(255, 255, 255, 0.025);
+}
+
+.secondaryButton > svg:first-child {
+flex: 0 0 auto;
+color: var(--hero-cyan);
+}
+
+.secondaryButton:hover {
+border-color: rgba(82, 230, 245, 0.45);
+background: rgba(82, 230, 245, 0.055);
+transform: translateY(-2px);
+}
+
+.secondaryArrow {
+color: #8ca5bd;
+transition:
+color 180ms ease,
+transform 180ms ease;
+}
+
+.secondaryButton:hover .secondaryArrow {
+color: var(--hero-cyan);
+transform: translate(2px, -2px);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.scrollLink:focus-visible {
+outline: 2px solid var(--hero-cyan);
+outline-offset: 4px;
+}
+
+/* ---------------- NOTE ---------------- */
+
+.heroNote {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: 27px;
+color: var(--hero-muted);
+font-size: 11px;
+line-height: 1.7;
+}
+
+.statusDot,
+.cardStatus {
+position: relative;
+flex: 0 0 auto;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: var(--hero-cyan);
+box-shadow: 0 0 13px rgba(82, 230, 245, 0.5);
+}
+
+/* ---------------- TECHNOLOGY VISUAL ---------------- */
+
+.heroVisual {
+position: relative;
+display: grid;
+place-items: center;
+min-width: 0;
+min-height: 440px;
+isolation: isolate;
+}
+
+.visualAmbient {
+position: absolute;
+width: 76%;
+aspect-ratio: 1;
+border-radius: 50%;
+background: rgba(30, 136, 194, 0.1);
+filter: blur(45px);
+pointer-events: none;
+}
+
+.orbit {
+position: absolute;
+border: 1px solid rgba(82, 230, 245, 0.19);
+border-radius: 50%;
+pointer-events: none;
+}
+
+.orbitOne {
+width: min(350px, 92%);
+aspect-ratio: 1;
+transform: rotate(-25deg) scaleY(0.78);
+animation: orbitRotate 32s linear infinite;
+}
+
+.orbitTwo {
+width: min(405px, 105%);
+aspect-ratio: 1;
+border-color: rgba(91, 140, 255, 0.22);
+transform: rotate(45deg) scaleY(0.62);
+animation: orbitRotateReverse 38s linear infinite;
+}
+
+.orbitRing {
+position: absolute;
+width: min(285px, 75%);
+aspect-ratio: 1;
+border: 1px dashed rgba(82, 230, 245, 0.15);
+border-radius: 50%;
+transform: rotate(25deg);
+}
+
+@keyframes orbitRotate {
+from {
+transform: rotate(-25deg) scaleY(0.78);
+}
+
+to {
+transform: rotate(335deg) scaleY(0.78);
+}
+}
+
+@keyframes orbitRotateReverse {
+from {
+transform: rotate(45deg) scaleY(0.62);
+}
+
+to {
+transform: rotate(-315deg) scaleY(0.62);
+}
+}
+
+/* Orbit nodes */
+
+.orbitPoint {
+position: absolute;
+display: block;
+width: 8px;
+height: 8px;
+border: 1px solid var(--hero-cyan);
+border-radius: 50%;
+background: #0b2639;
+box-shadow: 0 0 15px rgba(82, 230, 245, 0.6);
+}
+
+.pointOne {
+top: 12%;
+left: 24%;
+}
+
+.pointTwo {
+right: 9%;
+bottom: 28%;
+width: 6px;
+height: 6px;
+}
+
+.pointThree {
+top: 27%;
+right: 17%;
+}
+
+/* Central emblem */
+
+.glowCore {
+position: relative;
+z-index: 1;
+display: grid;
+place-items: center;
+width: 196px;
+aspect-ratio: 1;
+padding: 13px;
+border: 1px solid rgba(82, 230, 245, 0.34);
+border-radius: 50%;
+background: rgba(6, 24, 39, 0.72);
+box-shadow:
+0 0 65px rgba(35, 167, 213, 0.13),
+inset 0 0 35px rgba(82, 230, 245, 0.045);
+backdrop-filter: blur(8px);
+animation: coreFloat 5s ease-in-out infinite;
+}
+
+.coreInner {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 100%;
+border: 1px solid rgba(82, 230, 245, 0.14);
+border-radius: 50%;
+background: radial-gradient(
+circle at 50% 35%,
+rgba(25, 68, 93, 0.85),
+rgba(5, 21, 35, 0.96) 72%
+);
+}
+
+.coreLogo {
+color: var(--hero-cyan);
+font-size: 59px;
+font-weight: 900;
+letter-spacing: -6px;
+line-height: 1;
+text-shadow: 0 0 25px rgba(82, 230, 245, 0.18);
+}
+
+.coreDivider {
+width: 38px;
+height: 1px;
+margin: 11px 0;
+background: var(--hero-cyan);
+opacity: 0.75;
+}
+
+.coreName {
+color: var(--hero-white);
+font-size: 10px;
+font-weight: 900;
+letter-spacing: 2.6px;
+}
+
+.coreInner > small {
+margin-top: 5px;
+color: #8ea9c0;
+font-size: 7px;
+letter-spacing: 2px;
+}
+
+@keyframes coreFloat {
+0%,
+100% {
+transform: translateY(0);
+}
+
+50% {
+transform: translateY(-7px);
+}
+}
+
+/* Floating cards */
+
+.floatingCard {
+position: absolute;
+z-index: 3;
+display: flex;
+align-items: center;
+gap: 11px;
+max-width: calc(100% - 8px);
+padding: 14px;
+border: 1px solid rgba(143, 190, 220, 0.2);
+border-radius: 13px;
+background: rgba(8, 27, 44, 0.94);
+box-shadow:
+0 18px 45px rgba(0, 0, 0, 0.2),
+inset 0 1px 0 rgba(255, 255, 255, 0.025);
+backdrop-filter: blur(14px);
+}
+
+.cardTop {
+top: 45px;
+right: -5px;
+animation: cardFloat 5.5s ease-in-out infinite;
+}
+
+.cardBottom {
+bottom: 43px;
+left: -4px;
+animation: cardFloat 6s ease-in-out infinite reverse;
+}
+
+.miniIcon {
+display: grid;
+place-items: center;
+flex: 0 0 auto;
+width: 39px;
+height: 39px;
+border: 1px solid rgba(82, 230, 245, 0.12);
+border-radius: 10px;
+color: var(--hero-cyan);
+background: rgba(82, 230, 245, 0.075);
+}
+
+.networkIcon {
+color: #9ab9ff;
+border-color: rgba(91, 140, 255, 0.17);
+background: rgba(91, 140, 255, 0.08);
+}
+
+.cardCopy {
+min-width: 0;
+}
+
+.cardCopy strong,
+.cardCopy small {
+display: block;
+}
+
+.cardCopy strong {
+color: var(--hero-white);
+font-size: 11px;
+font-weight: 750;
+white-space: nowrap;
+}
+
+.cardCopy small {
+margin-top: 5px;
+color: var(--hero-muted);
+font-size: 9px;
+line-height: 1.5;
+white-space: nowrap;
+}
+
+.cardStatus {
+width: 6px;
+height: 6px;
+margin-left: 4px;
+}
+
+.cardCheck {
+flex: 0 0 auto;
+margin-left: 2px;
+color: var(--hero-cyan);
+}
+
+@keyframes cardFloat {
+0%,
+100% {
+translate: 0 0;
+}
+
+50% {
+translate: 0 -6px;
+}
+}
+
+/* Visual badge */
+
+.visualBadge {
+position: absolute;
+right: 0;
+bottom: 4px;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 9px 12px;
+border: 1px solid rgba(82, 230, 245, 0.14);
+border-radius: 8px;
+color: var(--hero-cyan);
+background: rgba(7, 24, 39, 0.8);
+font-size: 8px;
+font-weight: 800;
+letter-spacing: 1.2px;
+}
+
+.visualCross {
+position: absolute;
+top: 17%;
+left: 9%;
+color: rgba(82, 230, 245, 0.7);
+font-size: 20px;
+font-weight: 300;
+}
+
+/* ---------------- SCROLL LINK ---------------- */
+
+.scrollLink {
+position: relative;
+z-index: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 11px;
+width: fit-content;
+max-width: calc(100% - 32px);
+margin: 32px auto 0;
+color: #91a6ba;
+font-size: 9px;
+font-weight: 750;
+letter-spacing: 1.4px;
+line-height: 1.7;
+text-align: center;
+text-decoration: none;
+}
+
+.scrollIcon {
+display: grid;
+place-items: center;
+flex: 0 0 auto;
+width: 28px;
+height: 28px;
+border: 1px solid var(--hero-border);
+border-radius: 50%;
+color: var(--hero-cyan);
+transition:
+border-color 180ms ease,
+transform 180ms ease;
+}
+
+.scrollLink:hover .scrollIcon {
+border-color: var(--hero-cyan);
+transform: translateY(3px);
+}
+
+.scrollLine {
+display: block;
+width: 30px;
+height: 1px;
+background: linear-gradient(
+90deg,
+rgba(82, 230, 245, 0.5),
+transparent
+);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1050px) {
+.heroInner {
+grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+gap: 20px;
+}
+
+.heroTitle {
+font-size: clamp(41px, 5.5vw, 58px);
+}
+
+.heroVisual {
+min-height: 390px;
+}
+
+.floatingCard {
+padding: 11px;
+gap: 8px;
+}
+
+.cardTop {
+right: 0;
+}
+
+.cardBottom {
+left: 0;
+}
+
+.glowCore {
+width: 170px;
+}
+
+.orbitOne {
+width: 310px;
+}
+
+.orbitTwo {
+width: 355px;
+}
+}
+
+@media (max-width: 760px) {
+.hero {
+min-height: auto;
+padding: 70px 0 26px;
+}
+
+.heroInner {
+grid-template-columns: 1fr;
+gap: 12px;
+width: min(100% - 36px, 600px);
+}
+
+.heroContent {
+max-width: none;
+}
+
+.heroTitle {
+margin-top: 23px;
+font-size: clamp(42px, 8vw, 58px);
+letter-spacing: -2px;
+}
+
+.heroDescription {
+max-width: 560px;
+font-size: 13px;
+}
+
+.heroVisual {
+width: 100%;
+min-height: 340px;
+margin-top: 6px;
+}
+
+.glowCore {
+width: 158px;
+}
+
+.coreLogo {
+font-size: 48px;
+}
+
+.orbitOne {
+width: 280px;
+}
+
+.orbitTwo {
+width: 335px;
+}
+
+.orbitRing {
+width: 240px;
+}
+
+.cardTop {
+top: 28px;
+right: 0;
+}
+
+.cardBottom {
+bottom: 28px;
+left: 0;
+}
+
+.visualBadge {
+right: 0;
+bottom: 0;
+}
+
+.scrollLink {
+margin-top: 23px;
+}
+}
+
+@media (max-width: 480px) {
+.hero {
+padding-top: 56px;
+}
+
+.heroInner {
+width: calc(100% - 30px);
+}
+
+.eyebrow {
+gap: 8px;
+font-size: 9px;
+letter-spacing: 1px;
+}
+
+.eyebrowIcon {
+width: 27px;
+height: 27px;
+}
+
+.eyebrowLine {
+display: none;
+}
+
+.heroTitle {
+font-size: clamp(37px, 10vw, 45px);
+letter-spacing: -1.8px;
+}
+
+.heroDescription {
+margin-top: 17px;
+font-size: 12px;
+line-height: 1.9;
+}
+
+.heroHighlights {
+gap: 9px 13px;
+margin-top: 19px;
+}
+
+.heroHighlights > span {
+font-size: 9px;
+}
+
+.heroActions {
+align-items: stretch;
+flex-direction: column;
+gap: 10px;
+margin-top: 25px;
+}
+
+.primaryButton,
+.secondaryButton {
+width: 100%;
+min-height: 49px;
+}
+
+.heroNote {
+align-items: flex-start;
+margin-top: 21px;
+font-size: 10px;
+}
+
+.heroVisual {
+min-height: 300px;
+margin-top: 5px;
+}
+
+.glowCore {
+width: 137px;
+padding: 9px;
+}
+
+.coreLogo {
+font-size: 42px;
+}
+
+.coreName {
+font-size: 9px;
+}
+
+.coreInner > small {
+font-size: 6px;
+}
+
+.orbitOne {
+width: 240px;
+}
+
+.orbitTwo {
+width: 290px;
+}
+
+.orbitRing {
+width: 205px;
+}
+
+.floatingCard {
+gap: 7px;
+padding: 9px;
+border-radius: 10px;
+}
+
+.miniIcon {
+width: 32px;
+height: 32px;
+}
+
+.cardCopy strong {
+font-size: 9px;
+}
+
+.cardCopy small {
+font-size: 8px;
+}
+
+.cardCheck {
+width: 14px;
+}
+
+.cardTop {
+top: 21px;
+right: 0;
+}
+
+.cardBottom {
+bottom: 25px;
+left: 0;
+}
+
+.visualBadge {
+right: 0;
+bottom: -2px;
+gap: 5px;
+padding: 7px 8px;
+font-size: 7px;
+letter-spacing: 0.8px;
+}
+
+.scrollLink {
+gap: 8px;
+font-size: 8px;
+letter-spacing: 1px;
+}
+
+.scrollLine {
+width: 18px;
+}
+}
+
+/* ---------------- REDUCED MOTION ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+.heroGlow,
+.orbitOne,
+.orbitTwo,
+.glowCore,
+.cardTop,
+.cardBottom {
+animation: none;
+}
+
+.primaryButton,
+.secondaryButton,
+.buttonIcon,
+.secondaryArrow,
+.scrollIcon {
+transition: none;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+transform: none;
+}
+}

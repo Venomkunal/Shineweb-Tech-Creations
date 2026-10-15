@@ -1,0 +1,589 @@
+.ctaSection {
+position: relative;
+isolation: isolate;
+width: 100%;
+padding: 100px 24px;
+overflow: hidden;
+background: #070b14;
+color: #f5f8ff;
+}
+
+.sectionContainer {
+width: 100%;
+max-width: 1240px;
+margin-inline: auto;
+}
+
+.ctaCard {
+position: relative;
+isolation: isolate;
+overflow: hidden;
+min-height: 470px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: clamp(32px, 6vw, 76px);
+border: 1px solid rgba(89, 190, 255, 0.22);
+border-radius: 32px;
+background:
+linear-gradient(
+125deg,
+rgba(15, 29, 53, 0.98) 0%,
+rgba(9, 19, 37, 0.98) 50%,
+rgba(7, 14, 28, 0.99) 100%
+);
+box-shadow:
+0 24px 90px rgba(0, 0, 0, 0.3),
+inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+/* Background effects */
+
+.backgroundGrid {
+position: absolute;
+z-index: -2;
+inset: 0;
+pointer-events: none;
+opacity: 0.24;
+background-image:
+linear-gradient(rgba(123, 174, 255, 0.07) 1px, transparent 1px),
+linear-gradient(
+90deg,
+rgba(123, 174, 255, 0.07) 1px,
+transparent 1px
+);
+background-size: 44px 44px;
+mask-image: linear-gradient(
+90deg,
+transparent 0%,
+black 40%,
+black 100%
+);
+}
+
+.ctaGlow {
+position: absolute;
+z-index: -1;
+top: -260px;
+right: -90px;
+width: 580px;
+height: 580px;
+border-radius: 50%;
+pointer-events: none;
+background: radial-gradient(
+circle,
+rgba(0, 194, 255, 0.2) 0%,
+rgba(30, 105, 255, 0.1) 36%,
+transparent 70%
+);
+filter: blur(12px);
+animation: glowPulse 7s ease-in-out infinite alternate;
+}
+
+.ctaGlowSecondary {
+position: absolute;
+z-index: -1;
+bottom: -250px;
+left: 15%;
+width: 430px;
+height: 350px;
+border-radius: 50%;
+pointer-events: none;
+background: radial-gradient(
+circle,
+rgba(28, 99, 255, 0.12),
+transparent 70%
+);
+filter: blur(15px);
+}
+
+.orbit {
+position: absolute;
+z-index: -1;
+top: 52px;
+right: 9%;
+width: 210px;
+height: 210px;
+border: 1px solid rgba(94, 199, 255, 0.16);
+border-radius: 50%;
+pointer-events: none;
+animation: orbitFloat 8s ease-in-out infinite;
+}
+
+.orbit::before,
+.orbit::after {
+position: absolute;
+content: "";
+border: 1px solid rgba(94, 199, 255, 0.13);
+border-radius: 50%;
+inset: 20px;
+}
+
+.orbit::after {
+inset: 43px;
+border-color: rgba(94, 199, 255, 0.1);
+}
+
+.orbitDot,
+.orbitDotSecondary {
+position: absolute;
+width: 9px;
+height: 9px;
+border-radius: 50%;
+background: #50d8ff;
+box-shadow: 0 0 20px rgba(80, 216, 255, 0.85);
+}
+
+.orbitDot {
+top: 34px;
+left: 31px;
+}
+
+.orbitDotSecondary {
+right: 16px;
+bottom: 57px;
+width: 6px;
+height: 6px;
+background: #7c8cff;
+box-shadow: 0 0 16px rgba(124, 140, 255, 0.75);
+}
+
+/* Main content */
+
+.ctaContent {
+position: relative;
+z-index: 1;
+max-width: 780px;
+}
+
+.eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 27px;
+padding: 10px 15px;
+border: 1px solid rgba(85, 198, 255, 0.23);
+border-radius: 999px;
+background: rgba(40, 145, 220, 0.08);
+color: #82dcff;
+font-size: 11px;
+font-weight: 750;
+letter-spacing: 1.8px;
+line-height: 1.4;
+}
+
+.eyebrow svg {
+flex-shrink: 0;
+}
+
+.ctaTitle {
+max-width: 760px;
+margin: 0;
+color: #f6f9ff;
+font-size: clamp(38px, 5.5vw, 68px);
+font-weight: 750;
+letter-spacing: -2.9px;
+line-height: 1.1;
+}
+
+.ctaTitle span {
+display: block;
+margin-top: 5px;
+background: linear-gradient(
+95deg,
+#ffffff 0%,
+#83e1ff 43%,
+#6f9dff 100%
+);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: transparent;
+}
+
+.ctaDescription {
+max-width: 610px;
+margin: 25px 0 0;
+color: #aab9cf;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.9;
+}
+
+/* Actions */
+
+.ctaActions {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 14px;
+margin-top: 33px;
+}
+
+.primaryButton,
+.secondaryButton {
+position: relative;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+min-height: 54px;
+padding: 0 23px;
+border-radius: 12px;
+font-size: 14px;
+font-weight: 700;
+line-height: 1.4;
+text-decoration: none;
+transition:
+transform 220ms ease,
+background 220ms ease,
+border-color 220ms ease,
+box-shadow 220ms ease;
+}
+
+.primaryButton {
+border: 1px solid transparent;
+background: linear-gradient(110deg, #28c8f7, #4285ff);
+color: #04101d;
+box-shadow: 0 8px 28px rgba(40, 151, 255, 0.2);
+}
+
+.primaryButton:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 34px rgba(40, 151, 255, 0.32);
+}
+
+.buttonArrow {
+transition: transform 220ms ease;
+}
+
+.primaryButton:hover .buttonArrow {
+transform: translateX(4px);
+}
+
+.secondaryButton {
+border: 1px solid rgba(172, 199, 230, 0.22);
+background: rgba(255, 255, 255, 0.035);
+color: #e8f2ff;
+}
+
+.secondaryButton:hover {
+transform: translateY(-3px);
+border-color: rgba(83, 205, 255, 0.48);
+background: rgba(47, 166, 232, 0.1);
+}
+
+.secondaryButton > svg:first-child {
+color: #6cdbff;
+}
+
+.externalArrow {
+color: #9aacc4;
+transition:
+transform 220ms ease,
+color 220ms ease;
+}
+
+.secondaryButton:hover .externalArrow {
+transform: translate(2px, -2px);
+color: #75ddff;
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible {
+outline: 3px solid #83e1ff;
+outline-offset: 4px;
+}
+
+/* Trust indicators */
+
+.trustRow {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 17px;
+margin-top: 30px;
+}
+
+.trustItem {
+display: inline-flex;
+align-items: center;
+gap: 9px;
+color: #a8bad1;
+font-size: 12px;
+line-height: 1.6;
+}
+
+.trustItem svg {
+flex-shrink: 0;
+color: #6ddaff;
+}
+
+.trustDivider {
+width: 1px;
+height: 17px;
+background: rgba(190, 214, 240, 0.2);
+}
+
+/* Brand footer */
+
+.ctaFooter {
+position: relative;
+z-index: 1;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+margin-top: 56px;
+padding-top: 25px;
+border-top: 1px solid rgba(180, 210, 240, 0.13);
+}
+
+.brandMark {
+display: inline-flex;
+align-items: center;
+gap: 12px;
+}
+
+.brandInitials {
+display: grid;
+width: 42px;
+height: 42px;
+flex-shrink: 0;
+place-items: center;
+border: 1px solid rgba(93, 210, 255, 0.4);
+border-radius: 12px;
+background: linear-gradient(
+145deg,
+rgba(36, 184, 241, 0.2),
+rgba(58, 100, 255, 0.13)
+);
+color: #8de6ff;
+font-size: 15px;
+font-weight: 850;
+letter-spacing: -0.7px;
+}
+
+.brandName {
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.brandName strong {
+color: #edf7ff;
+font-size: 13px;
+font-weight: 800;
+letter-spacing: 1.7px;
+}
+
+.brandName > span {
+color: #91a8c2;
+font-size: 9px;
+font-weight: 650;
+letter-spacing: 2px;
+}
+
+.footerTagline {
+color: #8b9eb7;
+font-size: 12px;
+letter-spacing: 0.4px;
+text-align: right;
+}
+
+/* Animations */
+
+@keyframes glowPulse {
+from {
+opacity: 0.65;
+transform: scale(0.96);
+}
+
+to {
+opacity: 1;
+transform: scale(1.05);
+}
+}
+
+@keyframes orbitFloat {
+0%,
+100% {
+transform: translateY(0) rotate(0deg);
+}
+
+50% {
+transform: translateY(-9px) rotate(5deg);
+}
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+.ctaSection {
+padding: 76px 20px;
+}
+
+.ctaCard {
+min-height: auto;
+padding: 42px 32px 30px;
+border-radius: 25px;
+}
+
+.ctaContent {
+max-width: 100%;
+}
+
+.ctaTitle {
+max-width: 590px;
+font-size: clamp(37px, 7vw, 54px);
+letter-spacing: -2px;
+}
+
+.ctaDescription {
+max-width: 540px;
+margin-top: 20px;
+font-size: 15px;
+line-height: 1.85;
+}
+
+.ctaActions {
+gap: 12px;
+margin-top: 27px;
+}
+
+.orbit {
+top: 25px;
+right: -85px;
+opacity: 0.65;
+}
+
+.ctaFooter {
+margin-top: 42px;
+padding-top: 22px;
+}
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+.ctaSection {
+padding: 55px 15px;
+}
+
+.ctaCard {
+padding: 32px 22px 24px;
+border-radius: 21px;
+}
+
+.eyebrow {
+gap: 8px;
+margin-bottom: 23px;
+padding: 9px 11px;
+font-size: 9px;
+letter-spacing: 1.1px;
+}
+
+.ctaTitle {
+font-size: clamp(34px, 9vw, 43px);
+letter-spacing: -1.8px;
+line-height: 1.13;
+}
+
+.ctaTitle span {
+margin-top: 7px;
+}
+
+.ctaDescription {
+margin-top: 19px;
+font-size: 14px;
+line-height: 1.8;
+}
+
+.ctaActions {
+align-items: stretch;
+flex-direction: column;
+gap: 11px;
+margin-top: 25px;
+}
+
+.primaryButton,
+.secondaryButton {
+width: 100%;
+min-height: 52px;
+padding-inline: 16px;
+border-radius: 11px;
+font-size: 13px;
+}
+
+.trustRow {
+align-items: flex-start;
+flex-direction: column;
+gap: 11px;
+margin-top: 24px;
+}
+
+.trustItem {
+font-size: 11px;
+}
+
+.trustDivider {
+display: none;
+}
+
+.orbit {
+top: 20px;
+right: -140px;
+width: 190px;
+height: 190px;
+opacity: 0.45;
+}
+
+.ctaFooter {
+align-items: flex-start;
+flex-direction: column;
+gap: 15px;
+margin-top: 34px;
+padding-top: 20px;
+}
+
+.brandInitials {
+width: 38px;
+height: 38px;
+border-radius: 10px;
+}
+
+.brandName strong {
+font-size: 12px;
+}
+
+.brandName > span {
+font-size: 8px;
+letter-spacing: 1.6px;
+}
+
+.footerTagline {
+font-size: 11px;
+text-align: left;
+}
+}
+
+/* Accessibility: respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+.ctaGlow,
+.orbit {
+animation: none;
+}
+
+.primaryButton,
+.secondaryButton,
+.buttonArrow,
+.externalArrow {
+transition: none;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+transform: none;
+}
+}

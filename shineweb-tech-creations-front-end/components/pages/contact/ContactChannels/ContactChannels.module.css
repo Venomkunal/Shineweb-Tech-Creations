@@ -1,0 +1,631 @@
+/* ==================================================
+SHINEWEB TECH CREATIONS
+CONTACT CHANNELS — PREMIUM GLASS UI
+================================================== */
+
+.channelsSection {
+--channels-bg: #061321;
+--channels-surface: #0b1c2d;
+--channels-cyan: #52e6f5;
+--channels-blue: #5b8cff;
+--channels-white: #f2f7ff;
+--channels-muted: #9aadc2;
+--channels-border: rgba(144, 190, 222, 0.15);
+
+position: relative;
+isolation: isolate;
+overflow: hidden;
+padding: 105px 0;
+color: var(--channels-white);
+background:
+radial-gradient(
+ellipse at 12% 45%,
+rgba(24, 95, 147, 0.10),
+transparent 38%
+),
+radial-gradient(
+ellipse at 90% 75%,
+rgba(45, 85, 190, 0.07),
+transparent 35%
+),
+var(--channels-bg);
+}
+
+.channelsSection::before {
+position: absolute;
+z-index: -1;
+top: 0;
+right: 0;
+left: 0;
+height: 1px;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(82, 230, 245, 0.23),
+transparent
+);
+content: "";
+}
+
+.sectionContainer {
+width: min(1160px, calc(100% - 48px));
+margin-inline: auto;
+}
+
+/* ---------------- SECTION HEADING ---------------- */
+
+.sectionHeading {
+max-width: 700px;
+margin: 0 auto 49px;
+text-align: center;
+}
+
+.eyebrow {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 9px;
+color: var(--channels-cyan);
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 2px;
+line-height: 1.7;
+}
+
+.eyebrow svg {
+flex: 0 0 auto;
+}
+
+.sectionHeading h2 {
+margin: 20px 0 0;
+color: var(--channels-white);
+font-size: clamp(34px, 4.6vw, 51px);
+font-weight: 800;
+letter-spacing: -2px;
+line-height: 1.15;
+overflow-wrap: anywhere;
+}
+
+.sectionHeading h2 > span {
+color: var(--channels-cyan);
+}
+
+.sectionHeading > p {
+max-width: 550px;
+margin: 18px auto 0;
+color: var(--channels-muted);
+font-size: 14px;
+line-height: 1.9;
+}
+
+/* ---------------- CONTACT CARD GRID ---------------- */
+
+.channelGrid {
+display: grid;
+grid-template-columns: repeat(4, minmax(0, 1fr));
+gap: 17px;
+align-items: stretch;
+}
+
+.channelCard {
+--card-accent: var(--channels-cyan);
+
+position: relative;
+isolation: isolate;
+display: flex;
+flex-direction: column;
+min-width: 0;
+min-height: 300px;
+overflow: hidden;
+padding: 24px 21px 21px;
+border: 1px solid var(--channels-border);
+border-radius: 16px;
+color: var(--channels-white);
+background: linear-gradient(
+150deg,
+rgba(16, 39, 59, 0.91),
+rgba(8, 24, 40, 0.96)
+);
+text-decoration: none;
+animation: channelEnter 550ms both;
+animation-delay: calc(var(--card-index, 0) * 80ms);
+transition:
+transform 220ms ease,
+border-color 220ms ease,
+box-shadow 220ms ease,
+background 220ms ease;
+}
+
+.channelCard::before {
+position: absolute;
+z-index: -1;
+inset: 0;
+background: radial-gradient(
+circle at 0% 0%,
+rgba(82, 230, 245, 0.10),
+transparent 62%
+);
+content: "";
+opacity: 0;
+transition: opacity 220ms ease;
+}
+
+.channelCard::after {
+position: absolute;
+top: 0;
+left: 18%;
+width: 64%;
+height: 1px;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(82, 230, 245, 0.48),
+transparent
+);
+content: "";
+opacity: 0;
+transition: opacity 220ms ease;
+}
+
+.channelCard:hover {
+z-index: 1;
+transform: translateY(-6px);
+border-color: rgba(82, 230, 245, 0.39);
+box-shadow:
+0 20px 50px rgba(0, 0, 0, 0.17),
+0 0 35px rgba(82, 230, 245, 0.035);
+}
+
+.channelCard:hover::before,
+.channelCard:hover::after {
+opacity: 1;
+}
+
+.channelCard:focus-visible {
+outline: 2px solid var(--channels-cyan);
+outline-offset: 4px;
+}
+
+/* Featured phone card */
+
+.featuredCard {
+border-color: rgba(82, 230, 245, 0.28);
+background: linear-gradient(
+150deg,
+rgba(17, 48, 67, 0.98),
+rgba(8, 25, 41, 0.98)
+);
+}
+
+.featuredCard::before {
+background: radial-gradient(
+circle at 10% 0%,
+rgba(82, 230, 245, 0.12),
+transparent 65%
+);
+opacity: 0.7;
+}
+
+/* Card header */
+
+.channelTop {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+margin-bottom: 29px;
+}
+
+.channelIcon {
+display: grid;
+place-items: center;
+flex: 0 0 auto;
+width: 47px;
+height: 47px;
+border: 1px solid rgba(82, 230, 245, 0.19);
+border-radius: 12px;
+color: var(--channels-cyan);
+background: rgba(82, 230, 245, 0.075);
+box-shadow: inset 0 0 15px rgba(82, 230, 245, 0.025);
+transition:
+background 220ms ease,
+transform 220ms ease,
+box-shadow 220ms ease;
+}
+
+.channelCard:hover .channelIcon {
+transform: translateY(-2px);
+background: rgba(82, 230, 245, 0.13);
+box-shadow: 0 0 22px rgba(82, 230, 245, 0.07);
+}
+
+.cardArrow {
+display: grid;
+place-items: center;
+width: 31px;
+height: 31px;
+border: 1px solid var(--channels-border);
+border-radius: 9px;
+color: #91a8bf;
+transition:
+color 220ms ease,
+border-color 220ms ease,
+transform 220ms ease;
+}
+
+.channelCard:hover .cardArrow {
+transform: translate(2px, -2px);
+border-color: rgba(82, 230, 245, 0.3);
+color: var(--channels-cyan);
+}
+
+/* Card typography */
+
+.channelLabel {
+color: var(--channels-cyan);
+font-size: 9px;
+font-weight: 800;
+letter-spacing: 1.7px;
+line-height: 1.6;
+}
+
+.channelCard h3 {
+margin: 11px 0 0;
+color: var(--channels-white);
+font-size: 17px;
+font-weight: 750;
+letter-spacing: -0.35px;
+line-height: 1.5;
+overflow-wrap: anywhere;
+}
+
+.channelDescription {
+margin: 12px 0 25px;
+color: var(--channels-muted);
+font-size: 11px;
+line-height: 1.9;
+}
+
+.cardFooter {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 8px;
+margin-top: auto;
+padding-top: 16px;
+border-top: 1px solid rgba(144, 190, 222, 0.11);
+}
+
+.channelAction {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+color: var(--channels-cyan);
+font-size: 11px;
+font-weight: 750;
+line-height: 1.6;
+}
+
+.channelAction svg {
+flex: 0 0 auto;
+transition: transform 180ms ease;
+}
+
+.channelCard:hover .channelAction svg {
+transform: translate(2px, -2px);
+}
+
+.cardIndex {
+position: absolute;
+top: 75px;
+right: 20px;
+z-index: -1;
+color: rgba(200, 225, 245, 0.035);
+font-size: 55px;
+font-weight: 900;
+letter-spacing: -4px;
+pointer-events: none;
+}
+
+/* ---------------- BUSINESS HOURS ---------------- */
+
+.hoursBar {
+position: relative;
+display: flex;
+align-items: center;
+gap: 17px;
+margin-top: 24px;
+padding: 22px 25px;
+border: 1px solid var(--channels-border);
+border-radius: 15px;
+background: linear-gradient(
+110deg,
+rgba(16, 39, 59, 0.78),
+rgba(8, 24, 40, 0.92)
+);
+}
+
+.hoursIcon {
+display: grid;
+place-items: center;
+flex: 0 0 auto;
+width: 45px;
+height: 45px;
+border: 1px solid rgba(82, 230, 245, 0.18);
+border-radius: 12px;
+color: var(--channels-cyan);
+background: rgba(82, 230, 245, 0.07);
+}
+
+.hoursContent {
+display: flex;
+flex-direction: column;
+min-width: 0;
+gap: 5px;
+}
+
+.hoursEyebrow {
+color: var(--channels-cyan);
+font-size: 8px;
+font-weight: 800;
+letter-spacing: 1.7px;
+}
+
+.hoursContent strong {
+color: var(--channels-white);
+font-size: 13px;
+font-weight: 750;
+}
+
+.hoursText {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 7px;
+color: var(--channels-muted);
+font-size: 11px;
+line-height: 1.8;
+}
+
+.hoursSeparator {
+color: var(--channels-cyan);
+}
+
+.timezoneBadge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+margin-left: auto;
+padding: 9px 12px;
+border: 1px solid rgba(82, 230, 245, 0.13);
+border-radius: 9px;
+color: #c8dbea;
+background: rgba(82, 230, 245, 0.035);
+font-size: 10px;
+font-weight: 700;
+white-space: nowrap;
+}
+
+.timezoneDot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(--channels-cyan);
+box-shadow: 0 0 10px rgba(82, 230, 245, 0.4);
+}
+
+.hoursArrow {
+flex: 0 0 auto;
+margin-left: 4px;
+color: #718ba4;
+}
+
+/* ---------------- CLOSING NOTE ---------------- */
+
+.contactNote {
+display: flex;
+align-items: flex-start;
+justify-content: center;
+gap: 10px;
+margin-top: 23px;
+color: var(--channels-muted);
+text-align: center;
+}
+
+.contactNote > svg {
+flex: 0 0 auto;
+margin-top: 2px;
+color: var(--channels-cyan);
+}
+
+.contactNote p {
+margin: 0;
+font-size: 11px;
+line-height: 1.8;
+}
+
+.contactNote strong {
+margin-right: 4px;
+color: #d9e7f4;
+font-weight: 750;
+}
+
+/* ---------------- ENTRANCE ANIMATION ---------------- */
+
+@keyframes channelEnter {
+from {
+opacity: 0;
+transform: translateY(12px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1050px) {
+.channelsSection {
+padding: 85px 0;
+}
+
+.channelGrid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 16px;
+}
+
+.channelCard {
+min-height: 275px;
+padding: 23px;
+}
+
+.channelDescription {
+max-width: 390px;
+}
+}
+
+@media (max-width: 650px) {
+.channelsSection {
+padding: 70px 0;
+}
+
+.sectionContainer {
+width: min(100% - 36px, 540px);
+}
+
+.sectionHeading {
+margin-bottom: 33px;
+}
+
+.sectionHeading h2 {
+margin-top: 16px;
+font-size: clamp(32px, 7vw, 42px);
+letter-spacing: -1.4px;
+}
+
+.sectionHeading > p {
+margin-top: 14px;
+font-size: 12px;
+}
+
+.channelGrid {
+grid-template-columns: 1fr;
+gap: 13px;
+}
+
+.channelCard {
+min-height: auto;
+padding: 21px;
+border-radius: 14px;
+}
+
+.channelTop {
+margin-bottom: 22px;
+}
+
+.channelCard h3 {
+font-size: 17px;
+}
+
+.channelDescription {
+margin-bottom: 19px;
+font-size: 12px;
+}
+
+.hoursBar {
+gap: 13px;
+padding: 18px;
+}
+
+.timezoneBadge {
+padding: 8px;
+font-size: 9px;
+}
+
+.hoursArrow {
+display: none;
+}
+
+.contactNote {
+text-align: left;
+}
+}
+
+@media (max-width: 400px) {
+.sectionContainer {
+width: calc(100% - 28px);
+}
+
+.channelsSection {
+padding: 58px 0;
+}
+
+.eyebrow {
+font-size: 9px;
+letter-spacing: 1.5px;
+}
+
+.sectionHeading h2 {
+font-size: 32px;
+}
+
+.channelCard {
+padding: 19px;
+}
+
+.hoursBar {
+align-items: flex-start;
+padding: 15px;
+}
+
+.hoursIcon {
+width: 39px;
+height: 39px;
+}
+
+.hoursContent {
+flex: 1;
+}
+
+.hoursText {
+font-size: 10px;
+}
+
+.timezoneBadge {
+align-self: flex-start;
+gap: 5px;
+padding: 7px;
+font-size: 8px;
+}
+
+.contactNote p {
+font-size: 10px;
+}
+}
+
+/* ---------------- ACCESSIBILITY ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+.channelCard {
+animation: none;
+transition: none;
+}
+
+.channelCard:hover {
+transform: none;
+}
+
+.channelIcon,
+.cardArrow,
+.channelAction svg {
+transition: none;
+}
+
+.channelCard:hover .channelIcon,
+.channelCard:hover .cardArrow {
+transform: none;
+}
+}
