@@ -1,0 +1,1036 @@
+
+/* =========================================
+   SHINEWEB TECH CREATIONS
+   REQUEST A QUOTE MODAL
+   Responsive + Scrollable + Custom Scrollbar
+========================================= */
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  background: rgba(3, 9, 22, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  animation: overlayIn 0.2s ease;
+}
+
+/* =========================================
+   MODAL CONTAINER
+   IMPORTANT: DO NOT USE overflow: hidden
+   FOR THE ENTIRE MODAL ON DESKTOP
+========================================= */
+
+.modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 1060px;
+
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+
+  scrollbar-width: thin;
+  scrollbar-color: #11bde7 #eaf2f8;
+
+  border: 1px solid rgba(129, 190, 255, 0.2);
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 32px 100px rgba(0, 0, 0, 0.4),
+    0 0 35px rgba(18, 200, 245, 0.05);
+
+  animation: modalIn 0.3s ease;
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR
+========================================= */
+
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #eaf2f8;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  min-height: 40px;
+
+  border: 2px solid #eaf2f8;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    180deg,
+    #54e5fa 0%,
+    #11bde7 50%,
+    #0789ee 100%
+  );
+
+  transition: background 0.2s ease;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #22d3ee 0%,
+    #0891b2 50%,
+    #0369a1 100%
+  );
+}
+
+.modal::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.closeButton {
+  position: absolute;
+  z-index: 5;
+
+  top: 17px;
+  right: 17px;
+
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+  padding: 0;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+
+  color: #475569;
+  background: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.closeButton:hover {
+  color: #087fca;
+  background: #edf9ff;
+  transform: rotate(90deg);
+}
+
+.closeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 0.83fr 1.17fr;
+
+  min-width: 0;
+  min-height: 640px;
+
+  align-items: stretch;
+}
+
+/* =========================================
+   LEFT BRANDING SIDEBAR
+========================================= */
+
+.sidebar {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 35px;
+  min-width: 0;
+
+  padding: 36px 32px 28px;
+
+  overflow: hidden;
+
+  color: #f8fbff;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(0, 203, 255, 0.2),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(37, 99, 235, 0.25),
+      transparent 42%
+    ),
+    #071327;
+}
+
+.sidebar::before,
+.sidebar::after {
+  position: absolute;
+
+  content: "";
+  pointer-events: none;
+
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  border-radius: 50%;
+}
+
+.sidebar::before {
+  top: 150px;
+  right: -150px;
+
+  width: 350px;
+  height: 350px;
+}
+
+.sidebar::after {
+  top: 190px;
+  right: -110px;
+
+  width: 270px;
+  height: 270px;
+}
+
+/* =========================================
+   BRAND MARK
+========================================= */
+
+.brandMark {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandIcon {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 43px;
+  height: 43px;
+
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  border-radius: 13px;
+
+  color: #54e8ff;
+  background: rgba(8, 145, 178, 0.15);
+}
+
+.brandMark > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+.brandMark strong {
+  color: #5ee6ff;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+}
+
+/* =========================================
+   SIDEBAR CONTENT
+========================================= */
+
+.sidebarContent {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #0b91cf;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.sidebar .eyebrow {
+  color: #62e4ff;
+}
+
+.sidebarContent h2 {
+  margin: 20px 0 15px;
+
+  font-size: clamp(29px, 3.1vw, 39px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1.7px;
+}
+
+.sidebarContent h2 span {
+  color: #50dfff;
+}
+
+.sidebarContent > p {
+  max-width: 320px;
+  margin: 0;
+
+  color: #a7b7cb;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   BENEFITS
+========================================= */
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  margin-top: 35px;
+}
+
+.benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.benefitIcon {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(94, 234, 255, 0.2);
+  border-radius: 10px;
+
+  color: #58e4ff;
+  background: rgba(14, 165, 233, 0.1);
+}
+
+.benefit > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.benefit strong {
+  color: #f4f9ff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.benefit > div > span {
+  color: #9cacc1;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   SIDEBAR FOOTER
+========================================= */
+
+.sidebarFooter {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: #aabbd0;
+
+  font-size: 11px;
+}
+
+/* =========================================
+   RIGHT FORM PANEL
+========================================= */
+
+.formPanel {
+  min-width: 0;
+
+  padding: 43px 38px 28px;
+
+  background: #ffffff;
+}
+
+/* =========================================
+   FORM HEADER
+========================================= */
+
+.formHeader {
+  margin-bottom: 27px;
+}
+
+.formHeader h2 {
+  margin: 10px 0 8px;
+
+  color: #101c30;
+
+  font-size: clamp(26px, 3vw, 33px);
+  font-weight: 800;
+  letter-spacing: -1.1px;
+}
+
+.formHeader > p {
+  margin: 0;
+
+  color: #69778b;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #06b6d4;
+
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.12);
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 19px 15px;
+}
+
+.field {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.field label {
+  color: #26364d;
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.field label span {
+  color: #0891b2;
+}
+
+/* =========================================
+   INPUTS, SELECTS AND TEXTAREA
+========================================= */
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  border: 1px solid #dce4ee;
+  border-radius: 10px;
+
+  outline: none;
+
+  color: #15253a;
+  background: #f9fbfd;
+
+  font: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.field input,
+.field select {
+  height: 43px;
+  padding: 0 12px;
+}
+
+.field select {
+  padding-right: 32px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  cursor: pointer;
+}
+
+.field textarea {
+  min-height: 108px;
+  padding: 12px;
+
+  resize: vertical;
+
+  line-height: 1.65;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #98a5b5;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #12b9df;
+
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.11);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid transparent;
+}
+
+/* =========================================
+   SELECT WRAPPER
+========================================= */
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap > svg {
+  position: absolute;
+
+  top: 50%;
+  right: 12px;
+
+  color: #77879b;
+
+  pointer-events: none;
+
+  transform: translateY(-50%);
+}
+
+/* =========================================
+   FULL-WIDTH FIELD
+========================================= */
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.charCount {
+  align-self: flex-end;
+
+  margin-top: -3px;
+
+  color: #8794a5;
+
+  font-size: 10px;
+}
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.errorMessage {
+  margin: 0;
+  padding: 11px 13px;
+
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+
+  color: #b91c1c;
+  background: #fff5f5;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 49px;
+
+  padding: 13px 18px;
+
+  border: 0;
+  border-radius: 11px;
+
+  color: #031426;
+
+  background: linear-gradient(
+    110deg,
+    #54e5fa,
+    #45b8ff
+  );
+
+  box-shadow: 0 7px 20px rgba(14, 165, 233, 0.18);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    filter 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 26px rgba(14, 165, 233, 0.25);
+
+  filter: saturate(1.1);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* =========================================
+   PRIVACY NOTE
+========================================= */
+
+.privacyNote {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+
+  margin: -4px 0 0;
+
+  color: #78879a;
+
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.privacyNote svg {
+  flex-shrink: 0;
+  color: #0891b2;
+}
+
+/* =========================================
+   ALTERNATIVE CONTACT
+========================================= */
+
+.alternative {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #edf1f5;
+
+  color: #728095;
+
+  font-size: 11px;
+}
+
+.alternative > svg {
+  color: #0891b2;
+}
+
+.alternative a {
+  color: #087eaf;
+
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.alternative a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   LOADING SPINNER
+========================================= */
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* =========================================
+   SUCCESS STATE
+========================================= */
+
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  min-height: 550px;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+
+  width: 74px;
+  height: 74px;
+
+  margin-bottom: 25px;
+
+  border: 1px solid #a5f3fc;
+  border-radius: 22px;
+
+  color: #0891b2;
+  background: #ecfeff;
+}
+
+.successState h2 {
+  margin: 12px 0;
+
+  color: #101c30;
+
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.successState > p {
+  color: #69778b;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   SUCCESS SUMMARY
+========================================= */
+
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 7px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 20px 0;
+  padding: 18px;
+
+  border: 1px solid #e4edf5;
+  border-radius: 12px;
+
+  background: #f8fbfd;
+}
+
+.summary span {
+  margin-top: 6px;
+
+  color: #7b899c;
+
+  font-size: 10px;
+}
+
+.summary strong {
+  color: #172a40;
+
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.successState .submitButton {
+  margin-top: 5px;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 760px) {
+  .overlay {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    border-radius: 18px;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .sidebar {
+    gap: 22px;
+    padding: 24px 24px 20px;
+  }
+
+  .sidebarContent h2 {
+    margin: 15px 0 10px;
+
+    font-size: 29px;
+  }
+
+  .sidebarContent > p {
+    max-width: 420px;
+
+    font-size: 12px;
+  }
+
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-top: 22px;
+  }
+
+  .benefit {
+    gap: 9px;
+  }
+
+  .benefitIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .benefit strong {
+    font-size: 11px;
+  }
+
+  .benefit > div > span {
+    font-size: 10px;
+  }
+
+  .sidebarFooter {
+    padding-top: 14px;
+  }
+
+  .formPanel {
+    padding: 28px 24px 23px;
+  }
+
+  .formHeader {
+    padding-right: 28px;
+    margin-bottom: 23px;
+  }
+
+  .closeButton {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 440px) {
+  .overlay {
+    padding: 8px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
+
+    border-radius: 15px;
+  }
+
+  .modal::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .sidebar {
+    padding: 22px 19px 17px;
+  }
+
+  .brandIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brandMark > span {
+    font-size: 13px;
+  }
+
+  .sidebarContent h2 {
+    font-size: 27px;
+  }
+
+  .benefits {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .formPanel {
+    padding: 25px 18px 21px;
+  }
+
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 17px;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+
+  .formHeader h2 {
+    font-size: 27px;
+  }
+
+  .successState {
+    min-height: 430px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.closeButton:focus-visible,
+.submitButton:focus-visible,
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid #0891b2;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modal,
+  .spinner {
+    animation: none;
+  }
+
+  .modal {
+    scroll-behavior: auto;
+  }
+
+  .closeButton,
+  .submitButton,
+  .modal::-webkit-scrollbar-thumb {
+    transition: none;
+  }
+}

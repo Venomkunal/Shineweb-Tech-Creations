@@ -1,25 +1,54 @@
 
 import { Router } from "express";
 import {
-  createBlog,
-  deleteBlog,
-  getAllBlogs,
-  getPublishedBlogBySlug,
   getPublishedBlogs,
+  getPublishedBlogBySlug,
+  getFeaturedBlog,
+  getBlogCategories,
+  getAllBlogs,
+  createBlog,
   updateBlog,
+  deleteBlog,
 } from "../controllers/blogController";
-import { requireAdmin } from "../middleware/adminAuth";
+
+// import { authenticate } from "../middleware/authenticate";
+// import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
-// Public endpoints
+// Public routes — keep specific paths before /:slug.
+router.get("/featured", getFeaturedBlog);
+router.get("/categories", getBlogCategories);
 router.get("/", getPublishedBlogs);
 router.get("/:slug", getPublishedBlogBySlug);
 
-// Admin endpoints — authenticate and authorize first
-router.get("/admin/all",  getAllBlogs);
-router.post("/", createBlog);
-router.patch("/:id", updateBlog);
-router.delete("/:id", deleteBlog);
+// Admin routes.
+router.get(
+  "/admin/all",
+  // authenticate,
+  // requireAdmin,
+  getAllBlogs
+);
+
+router.post(
+  "/",
+  // authenticate,
+  // requireAdmin,
+  createBlog
+);
+
+router.patch(
+  "/:id",
+  // authenticate,
+  // requireAdmin,
+  updateBlog
+);
+
+router.delete(
+  "/:id",
+  // authenticate,
+  // requireAdmin,
+  deleteBlog
+);
 
 export default router;

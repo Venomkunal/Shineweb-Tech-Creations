@@ -5,6 +5,8 @@ import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+import RequestQuoteModal from "@/components/modals/RequestQuoteModal/RequestQuoteModal";
 import styles from "./Header.module.css";
 
 const navigation = [
@@ -23,27 +25,80 @@ const dropdowns: Record<
   { label: string; href: string }[]
 > = {
   Products: [
-    { label: "Laptops & Desktops", href: "/products?category=computers" },
-    { label: "Servers & Workstations", href: "/products?category=servers" },
-    { label: "Networking Equipment", href: "/products?category=networking" },
-    { label: "Software Licensing", href: "/products?category=software" },
-    { label: "CCTV & Surveillance", href: "/products?category=cctv" },
-    { label: "Accessories & Peripherals", href: "/products?category=accessories" },
+    {
+      label: "Laptops & Desktops",
+      href: "/products?category=computers",
+    },
+    {
+      label: "Servers & Workstations",
+      href: "/products?category=servers",
+    },
+    {
+      label: "Networking Equipment",
+      href: "/products?category=networking",
+    },
+    {
+      label: "Software Licensing",
+      href: "/products?category=software",
+    },
+    {
+      label: "CCTV & Surveillance",
+      href: "/products?category=cctv",
+    },
+    {
+      label: "Accessories & Peripherals",
+      href: "/products?category=accessories",
+    },
   ],
+
   Services: [
-    { label: "IT Hardware Supply", href: "/services#hardware" },
-    { label: "Software Licensing", href: "/services#software" },
-    { label: "Networking Infrastructure", href: "/services#networking" },
-    { label: "Cybersecurity", href: "/services#cybersecurity" },
-    { label: "Web Development", href: "/services#web-development" },
-    { label: "IT Support & AMC", href: "/services#support" },
+    {
+      label: "IT Hardware Supply",
+      href: "/services#hardware",
+    },
+    {
+      label: "Software Licensing",
+      href: "/services#software",
+    },
+    {
+      label: "Networking Infrastructure",
+      href: "/services#networking",
+    },
+    {
+      label: "Cybersecurity",
+      href: "/services#cybersecurity",
+    },
+    {
+      label: "Web Development",
+      href: "/services#web-development",
+    },
+    {
+      label: "IT Support & AMC",
+      href: "/services#support",
+    },
   ],
+
   Solutions: [
-    { label: "Healthcare", href: "/solutions#healthcare" },
-    { label: "Education", href: "/solutions#education" },
-    { label: "Retail & E-commerce", href: "/solutions#retail" },
-    { label: "Corporate Offices", href: "/solutions#corporate" },
-    { label: "Government & NGOs", href: "/solutions#government" },
+    {
+      label: "Healthcare",
+      href: "/solutions#healthcare",
+    },
+    {
+      label: "Education",
+      href: "/solutions#education",
+    },
+    {
+      label: "Retail & E-commerce",
+      href: "/solutions#retail",
+    },
+    {
+      label: "Corporate Offices",
+      href: "/solutions#corporate",
+    },
+    {
+      label: "Government & NGOs",
+      href: "/solutions#government",
+    },
   ],
 };
 
@@ -108,7 +163,9 @@ function MenuIcon({ open }: { open: boolean }) {
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
-      className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
+      className={`${styles.chevron} ${
+        open ? styles.chevronOpen : ""
+      }`}
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -123,15 +180,31 @@ export default function Header() {
   const router = useRouter();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(
+    null
+  );
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [accountOpen, setAccountOpen] = useState(false);
+
+  // Request a Quote modal state
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   function closeMenu() {
     setMenuOpen(false);
     setOpenDropdown(null);
     setAccountOpen(false);
+  }
+
+  function openQuoteModal() {
+    closeMenu();
+    setSearchOpen(false);
+    setAccountOpen(false);
+    setQuoteOpen(true);
+  }
+
+  function closeQuoteModal() {
+    setQuoteOpen(false);
   }
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
@@ -147,16 +220,24 @@ export default function Header() {
     closeMenu();
     setSearchOpen(false);
 
-    router.push(`/products?search=${encodeURIComponent(query)}`);
+    router.push(
+      `/products?search=${encodeURIComponent(query)}`
+    );
   }
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(`${href}/`);
+
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
   }
 
   function toggleDropdown(label: string) {
-    setOpenDropdown((current) => (current === label ? null : label));
+    setOpenDropdown((current) =>
+      current === label ? null : label
+    );
   }
 
   return (
@@ -182,7 +263,10 @@ export default function Header() {
           </span>
 
           <span className={styles.brandText}>
-            <span className={styles.brandName}>SHINEWEB</span>
+            <span className={styles.brandName}>
+              SHINEWEB
+            </span>
+
             <span className={styles.brandSubtitle}>
               TECH CREATIONS
             </span>
@@ -224,7 +308,9 @@ export default function Header() {
                       className={styles.dropdownToggle}
                       aria-label={`Toggle ${item.label} menu`}
                       aria-expanded={expanded}
-                      onClick={() => toggleDropdown(item.label)}
+                      onClick={() =>
+                        toggleDropdown(item.label)
+                      }
                     >
                       <ChevronIcon open={expanded} />
                     </button>
@@ -249,7 +335,10 @@ export default function Header() {
                         onClick={closeMenu}
                       >
                         <span>{entry.label}</span>
-                        <span className={styles.dropdownArrow}>↗</span>
+
+                        <span className={styles.dropdownArrow}>
+                          ↗
+                        </span>
                       </Link>
                     ))}
 
@@ -293,18 +382,22 @@ export default function Header() {
             </Link>
           </div>
 
-          <Link
-            href="/contact?type=quote"
+          {/* MOBILE QUOTE BUTTON */}
+
+          <button
+            type="button"
             className={styles.mobileQuote}
-            onClick={closeMenu}
+            onClick={openQuoteModal}
           >
             Get a Quote <span>↗</span>
-          </Link>
+          </button>
         </nav>
 
         {/* SEARCH, CART, ACCOUNT AND QUOTE */}
 
         <div className={styles.actions}>
+          {/* SEARCH */}
+
           <form
             className={`${styles.searchForm} ${
               searchOpen ? styles.searchExpanded : ""
@@ -315,10 +408,14 @@ export default function Header() {
             <input
               type="search"
               value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
+              onChange={(event) =>
+                setSearchQuery(event.target.value)
+              }
               onFocus={() => setSearchOpen(true)}
               onBlur={() => {
-                if (!searchQuery.trim()) setSearchOpen(false);
+                if (!searchQuery.trim()) {
+                  setSearchOpen(false);
+                }
               }}
               placeholder="Search products..."
               aria-label="Search products"
@@ -332,6 +429,8 @@ export default function Header() {
               <SearchIcon />
             </button>
           </form>
+
+          {/* CART */}
 
           <Link
             href="/cart"
@@ -354,24 +453,32 @@ export default function Header() {
               aria-expanded={accountOpen}
               aria-haspopup="true"
               aria-controls="account-menu"
-              onClick={() => setAccountOpen((previous) => !previous)}
+              onClick={() =>
+                setAccountOpen((previous) => !previous)
+              }
             >
               <AccountIcon />
-              <span className={styles.accountLabel}>Account</span>
+
+              <span className={styles.accountLabel}>
+                Account
+              </span>
+
               <span
                 className={`${styles.accountChevron} ${
-                  accountOpen ? styles.accountChevronOpen : ""
+                  accountOpen
+                    ? styles.accountChevronOpen
+                    : ""
                 }`}
                 aria-hidden="true"
-              >
-                
-              </span>
+              />
             </button>
 
             <div
               id="account-menu"
               className={`${styles.accountDropdown} ${
-                accountOpen ? styles.accountDropdownOpen : ""
+                accountOpen
+                  ? styles.accountDropdownOpen
+                  : ""
               }`}
               aria-hidden={!accountOpen}
               inert={!accountOpen}
@@ -403,12 +510,16 @@ export default function Header() {
                   <small>Access your account</small>
                 </span>
 
-                <span className={styles.accountMenuArrow}>↗</span>
+                <span className={styles.accountMenuArrow}>
+                  ↗
+                </span>
               </Link>
 
               <Link
                 href="/signup"
-                className={`${styles.accountMenuLink} ${styles.accountSignup}`}
+                className={`${styles.accountMenuLink} ${
+                  styles.accountSignup
+                }`}
                 onClick={() => setAccountOpen(false)}
               >
                 <span className={styles.accountMenuIcon}>
@@ -420,17 +531,22 @@ export default function Header() {
                   <small>Join Shineweb today</small>
                 </span>
 
-                <span className={styles.accountMenuArrow}>↗</span>
+                <span className={styles.accountMenuArrow}>
+                  ↗
+                </span>
               </Link>
             </div>
           </div>
 
-          <Link
-            href="/contact?type=quote"
+          {/* DESKTOP QUOTE BUTTON */}
+
+          <button
+            type="button"
             className={styles.quoteButton}
+            onClick={openQuoteModal}
           >
             Get a Quote <span>↗</span>
-          </Link>
+          </button>
 
           {/* MOBILE MENU BUTTON */}
 
@@ -443,7 +559,9 @@ export default function Header() {
               setAccountOpen(false);
             }}
             aria-label={
-              menuOpen ? "Close navigation" : "Open navigation"
+              menuOpen
+                ? "Close navigation"
+                : "Open navigation"
             }
             aria-expanded={menuOpen}
             aria-controls="main-navigation"
@@ -463,6 +581,13 @@ export default function Header() {
           onClick={closeMenu}
         />
       )}
+
+      {/* REQUEST A QUOTE MODAL */}
+
+      <RequestQuoteModal
+        open={quoteOpen}
+        onClose={closeQuoteModal}
+      />
     </header>
   );
 }

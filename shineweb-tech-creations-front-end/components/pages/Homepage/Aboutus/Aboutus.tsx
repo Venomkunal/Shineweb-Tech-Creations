@@ -93,7 +93,6 @@ export default function About() {
           <span className={styles.headerMeta}>
             SHINEWEB TECH CREATIONS
             <span className={styles.metaDivider}>/</span>
-            01
           </span>
         </header>
 
@@ -168,7 +167,7 @@ export default function About() {
                 OUR TECHNOLOGY ECOSYSTEM
               </span>
 
-              <span className={styles.visualIndex}>SW / 001</span>
+              <span className={styles.visualIndex}>SW</span>
             </div>
 
             <div className={styles.visualStage}>

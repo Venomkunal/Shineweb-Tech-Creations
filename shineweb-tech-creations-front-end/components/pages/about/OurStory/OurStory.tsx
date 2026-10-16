@@ -76,7 +76,7 @@ export default function OurStory() {
         <header className={styles.sectionHeader}>
           <div className={styles.sectionIdentity}>
             <Image
-              src="/shineweb-emblem.svg"
+              src="/logo.svg"
               alt="Shineweb Tech Creations"
               width={38}
               height={38}

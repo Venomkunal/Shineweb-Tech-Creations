@@ -1,0 +1,28 @@
+
+.quoteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  border-radius: 10px;
+  color: #06172b;
+  background: linear-gradient(110deg, #57e5fa, #48baff);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quoteButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.2);
+}
+
+.quoteButton:focus-visible {
+  outline: 3px solid #0891b2;
+  outline-offset: 4px;
+}

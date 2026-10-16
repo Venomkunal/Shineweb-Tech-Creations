@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import StoryModal from "./StoryModal";
+import RequestQuoteModal from "@/components/modals/RequestQuoteModal/RequestQuoteModal";
 import Link from "next/link";
 
 import {
@@ -37,12 +38,36 @@ const stats = [
 
 const services = [
   { icon: Monitor, label: "IT Hardware", href: "/services#hardware" },
-  { icon: AppWindow, label: "Software Licensing", href: "/services#software" },
-  { icon: Network, label: "Networking", href: "/services#networking" },
-  { icon: ShieldCheck, label: "Cybersecurity", href: "/services#cybersecurity" },
-  { icon: Cloud, label: "Cloud Solutions", href: "/services#cloud" },
-  { icon: Code2, label: "Web Development", href: "/services#web-development" },
-  { icon: Headset, label: "IT Support & AMC", href: "/services#support" },
+  {
+    icon: AppWindow,
+    label: "Software Licensing",
+    href: "/services#software",
+  },
+  {
+    icon: Network,
+    label: "Networking",
+    href: "/services#networking",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Cybersecurity",
+    href: "/services#cybersecurity",
+  },
+  {
+    icon: Cloud,
+    label: "Cloud Solutions",
+    href: "/services#cloud",
+  },
+  {
+    icon: Code2,
+    label: "Web Development",
+    href: "/services#web-development",
+  },
+  {
+    icon: Headset,
+    label: "IT Support & AMC",
+    href: "/services#support",
+  },
 ];
 
 const categories = [
@@ -131,7 +156,6 @@ function useCountUp(
   return count;
 }
 
-
 export default function Hero() {
   const categoryBarRef = useRef<HTMLElement | null>(null);
   const statsRef = useRef<HTMLDivElement | null>(null);
@@ -140,7 +164,13 @@ export default function Hero() {
   const [isStoryOpen, setIsStoryOpen] = useState(false);
   const [storyDuration, setStoryDuration] = useState("--:--");
 
+  // Request a Quote modal state
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
   const closeStory = () => setIsStoryOpen(false);
+
+  const openQuoteModal = () => setIsQuoteOpen(true);
+  const closeQuoteModal = () => setIsQuoteOpen(false);
 
   const productsCount = useCountUp(500, statsVisible);
   const clientsCount = useCountUp(100, statsVisible);
@@ -156,7 +186,7 @@ export default function Hero() {
       ]
     : stats.map(({ value }) => value);
 
-  // Start the count-up animation when statistics enter the viewport.
+  // Animate statistics when they enter the viewport.
   useEffect(() => {
     const element = statsRef.current;
 
@@ -182,13 +212,14 @@ export default function Hero() {
     return () => observer.disconnect();
   }, []);
 
-  // Automatically scroll categories on mobile.
+  // Automatically scroll product categories on mobile.
   useEffect(() => {
     const element = categoryBarRef.current;
 
     if (!element) return;
 
     const mobile = window.matchMedia("(max-width: 600px)");
+
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );
@@ -237,6 +268,7 @@ export default function Hero() {
       if (lastTime === 0) lastTime = time;
 
       const delta = Math.min((time - lastTime) / 1000, 0.05);
+
       lastTime = time;
 
       const loopWidth = getLoopWidth();
@@ -288,10 +320,13 @@ export default function Hero() {
     element.addEventListener("touchstart", pause, {
       passive: true,
     });
+
     element.addEventListener("pointerdown", pause);
+
     element.addEventListener("wheel", pause, {
       passive: true,
     });
+
     element.addEventListener("focusin", pause);
 
     document.addEventListener(
@@ -303,6 +338,7 @@ export default function Hero() {
     reducedMotion.addEventListener("change", start);
 
     const resizeObserver = new ResizeObserver(start);
+
     resizeObserver.observe(element);
 
     start();
@@ -331,219 +367,293 @@ export default function Hero() {
 
   const duplicatedCategories = [...categories, ...categories];
 
-useEffect(() => {
-  let cancelled = false;
+  // Fetch the story video duration.
+  useEffect(() => {
+    let cancelled = false;
 
-  async function loadStoryDuration() {
-    try {
-      const response = await fetch("/api/youtube-duration");
+    async function loadStoryDuration() {
+      try {
+        const response = await fetch("/api/youtube-duration");
 
-      if (!response.ok) {
-        throw new Error("Could not fetch video duration.");
+        if (!response.ok) {
+          throw new Error("Could not fetch video duration.");
+        }
+
+        const data: { duration: string } = await response.json();
+
+        if (!cancelled) {
+          setStoryDuration(data.duration);
+        }
+      } catch (error) {
+        console.error(
+          "Story duration detection failed:",
+          error
+        );
       }
-
-      const data: { duration: string } = await response.json();
-
-      if (!cancelled) {
-        setStoryDuration(data.duration);
-      }
-    } catch (error) {
-      console.error("Story duration detection failed:", error);
     }
-  }
 
-  void loadStoryDuration();
+    void loadStoryDuration();
 
-  return () => {
-    cancelled = true;
-  };
-}, []);
-
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
-    <section
-      className={styles.hero}
-      aria-labelledby="hero-heading"
-    >
-      <div className={styles.background} aria-hidden="true" />
-      <div className={styles.overlay} aria-hidden="true" />
+    <>
+      <section
+        className={styles.hero}
+        aria-labelledby="hero-heading"
+      >
+        <div
+          className={styles.background}
+          aria-hidden="true"
+        />
 
-      <div className={styles.container}>
-        <div className={styles.heroContent}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowLine} />
-            <span>YOUR IT PARTNER FOR A SMARTER TOMORROW</span>
-          </div>
+        <div
+          className={styles.overlay}
+          aria-hidden="true"
+        />
 
-          <h1 id="hero-heading" className={styles.heading}>
-            Transforming
-            <br />
-            Businesses with
-            <br />
-            <span>Next-Gen Technology</span>
-          </h1>
+        <div className={styles.container}>
+          {/* HERO CONTENT */}
 
-          <p className={styles.description}>
-            IT hardware, software licensing, networking,
-            cybersecurity, web and software development,
-            and cloud solutions — all under one roof.
-            Helping businesses in Assam, across India and beyond.
-          </p>
+          <div className={styles.heroContent}>
+            <div className={styles.eyebrow}>
+              <span className={styles.eyebrowLine} />
 
-          <div className={styles.ctaGroup}>
-            <Link href="/solutions" className={styles.primaryButton}>
-              Explore Solutions
-              <ArrowRight size={17} aria-hidden="true" />
-            </Link>
+              <span>
+                YOUR IT PARTNER FOR A SMARTER TOMORROW
+              </span>
+            </div>
 
-            <Link
-              href="/contact?type=quote"
-              className={styles.secondaryButton}
+            <h1
+              id="hero-heading"
+              className={styles.heading}
             >
-              <ArrowUpRight size={16} aria-hidden="true" />
-              Request a Quote
-            </Link>
-          </div>
+              Transforming
+              <br />
+              Businesses with
+              <br />
+              <span>Next-Gen Technology</span>
+            </h1>
 
-          <div className={styles.stats} ref={statsRef}>
-            {stats.map(({ icon: Icon, label, value }, index) => (
-              <div className={styles.stat} key={label}>
-                <span className={styles.statIcon}>
-                  <Icon
-                    size={18}
-                    strokeWidth={1.8}
-                    aria-hidden="true"
-                  />
-                </span>
+            <p className={styles.description}>
+              IT hardware, software licensing, networking,
+              cybersecurity, web and software development,
+              and cloud solutions — all under one roof.
+              Helping businesses in Assam, across India and beyond.
+            </p>
 
-                <div className={styles.statText}>
-                  <strong>
-                    <span aria-hidden="true">
-                      {animatedStats[index]}
-                    </span>
-                    <span className={styles.srOnly}>{value}</span>
-                  </strong>
-                  <span>{label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+            {/* HERO CTA BUTTONS */}
 
-        <aside
-          className={styles.servicePanel}
-          aria-label="Our services"
-        >
-          {services.map(({ icon: Icon, label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className={styles.serviceLink}
-            >
-              <span className={styles.serviceIcon}>
-                <Icon
+            <div className={styles.ctaGroup}>
+              <Link
+                href="/solutions"
+                className={styles.primaryButton}
+              >
+                Explore Solutions
+
+                <ArrowRight
                   size={17}
-                  strokeWidth={1.8}
                   aria-hidden="true"
                 />
-              </span>
+              </Link>
 
-              <span className={styles.serviceLabel}>{label}</span>
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={openQuoteModal}
+              >
+                <ArrowUpRight
+                  size={16}
+                  aria-hidden="true"
+                />
 
-              <ArrowUpRight
-                className={styles.serviceArrow}
-                size={15}
-                aria-hidden="true"
-              />
-            </Link>
-          ))}
-        </aside>
+                Request a Quote
+              </button>
+            </div>
 
-        <button
-          type="button"
-          className={styles.storyCard}
-          aria-label={`Watch Our Story${
-            storyDuration !== "--:--"
-              ? `, duration ${storyDuration}`
-              : ""
-          }`}
-          onClick={() => setIsStoryOpen(true)}
-        >
-          <span className={styles.playButton}>
-            <Play
-              size={16}
-              fill="currentColor"
-              aria-hidden="true"
-            />
-          </span>
+            {/* STATISTICS */}
 
-          <span className={styles.storyText}>
-            <strong>Our Story</strong>
-            <small>Watch our story</small>
-          </span>
+            <div
+              className={styles.stats}
+              ref={statsRef}
+            >
+              {stats.map(
+                ({ icon: Icon, label, value }, index) => (
+                  <div
+                    className={styles.stat}
+                    key={label}
+                  >
+                    <span className={styles.statIcon}>
+                      <Icon
+                        size={18}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
 
-          <span className={styles.storyDuration}>
-            {storyDuration}
-          </span>
-        </button>
+                    <div className={styles.statText}>
+                      <strong>
+                        <span aria-hidden="true">
+                          {animatedStats[index]}
+                        </span>
 
-        <div className={styles.imageCaption} aria-hidden="true">
-          <span>Technology</span>
-          <span>Today.</span>
-          <span>For a Better</span>
-          <span>Tomorrow.</span>
-        </div>
-      </div>
+                        <span className={styles.srOnly}>
+                          {value}
+                        </span>
+                      </strong>
 
-      <div className={styles.categoryScroller}>
-        <nav
-          ref={categoryBarRef}
-          className={styles.categoryBar}
-          aria-label="Product categories"
-          tabIndex={0}
-        >
-          {duplicatedCategories.map(
-            ({ icon: Icon, title, subtitle, href }, index) => {
-              const isDuplicate = index >= categories.length;
+                      <span>{label}</span>
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
 
-              return (
+          {/* SERVICE PANEL */}
+
+          <aside
+            className={styles.servicePanel}
+            aria-label="Our services"
+          >
+            {services.map(
+              ({ icon: Icon, label, href }) => (
                 <Link
-                  key={`${href}-${index}`}
+                  key={label}
                   href={href}
-                  className={styles.category}
-                  aria-hidden={isDuplicate || undefined}
-                  tabIndex={isDuplicate ? -1 : undefined}
+                  className={styles.serviceLink}
                 >
-                  <span className={styles.categoryIcon}>
+                  <span className={styles.serviceIcon}>
                     <Icon
-                      size={25}
-                      strokeWidth={1.7}
+                      size={17}
+                      strokeWidth={1.8}
                       aria-hidden="true"
                     />
                   </span>
 
-                  <span className={styles.categoryText}>
-                    <span>{title}</span>
-                    <span>{subtitle}</span>
+                  <span className={styles.serviceLabel}>
+                    {label}
                   </span>
 
-                  <ArrowRight
-                    className={styles.categoryArrow}
+                  <ArrowUpRight
+                    className={styles.serviceArrow}
                     size={15}
                     aria-hidden="true"
                   />
                 </Link>
-              );
-            }
-          )}
-        </nav>
-      </div>
+              )
+            )}
+          </aside>
 
-      <StoryModal
-        isOpen={isStoryOpen}
-        onClose={closeStory}
-        onDurationDetected={setStoryDuration}
+          {/* STORY CARD */}
+
+          <button
+            type="button"
+            className={styles.storyCard}
+            aria-label={`Watch Our Story${
+              storyDuration !== "--:--"
+                ? `, duration ${storyDuration}`
+                : ""
+            }`}
+            onClick={() => setIsStoryOpen(true)}
+          >
+            <span className={styles.playButton}>
+              <Play
+                size={16}
+                fill="currentColor"
+                aria-hidden="true"
+              />
+            </span>
+
+            <span className={styles.storyText}>
+              <strong>Our Story</strong>
+              <small>Watch our story</small>
+            </span>
+
+            <span className={styles.storyDuration}>
+              {storyDuration}
+            </span>
+          </button>
+
+          {/* IMAGE CAPTION */}
+
+          <div
+            className={styles.imageCaption}
+            aria-hidden="true"
+          >
+            <span>Technology</span>
+            <span>Today.</span>
+            <span>For a Better</span>
+            <span>Tomorrow.</span>
+          </div>
+        </div>
+
+        {/* PRODUCT CATEGORY SCROLLER */}
+
+        <div className={styles.categoryScroller}>
+          <nav
+            ref={categoryBarRef}
+            className={styles.categoryBar}
+            aria-label="Product categories"
+            tabIndex={0}
+          >
+            {duplicatedCategories.map(
+              ({ icon: Icon, title, subtitle, href }, index) => {
+                const isDuplicate = index >= categories.length;
+
+                return (
+                  <Link
+                    key={`${href}-${index}`}
+                    href={href}
+                    className={styles.category}
+                    aria-hidden={isDuplicate || undefined}
+                    tabIndex={isDuplicate ? -1 : undefined}
+                  >
+                    <span className={styles.categoryIcon}>
+                      <Icon
+                        size={25}
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <span className={styles.categoryText}>
+                      <span>{title}</span>
+                      <span>{subtitle}</span>
+                    </span>
+
+                    <ArrowRight
+                      className={styles.categoryArrow}
+                      size={15}
+                      aria-hidden="true"
+                    />
+                  </Link>
+                );
+              }
+            )}
+          </nav>
+        </div>
+
+        {/* EXISTING STORY MODAL */}
+
+        <StoryModal
+          isOpen={isStoryOpen}
+          onClose={closeStory}
+          onDurationDetected={setStoryDuration}
+        />
+      </section>
+
+      {/* REQUEST A QUOTE MODAL
+          Rendered outside the Hero section.
+          The modal component uses a portal to document.body. */}
+
+      <RequestQuoteModal
+        open={isQuoteOpen}
+        onClose={closeQuoteModal}
       />
-    </section>
+    </>
   );
 }
