@@ -1,0 +1,489 @@
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0;
+  color: #f4f8ff;
+  background: #081321;
+}
+
+.container {
+  width: min(1240px, calc(100% - 64px));
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 15px;
+  color: #48dcff;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.17em;
+}
+
+.eyebrow svg {
+  color: #48dcff;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: #f5f8ff;
+  font-size: clamp(30px, 4vw, 43px);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+
+.sectionTitle span {
+  color: #54dfff;
+}
+
+.sectionDescription {
+  max-width: 490px;
+  margin: 12px 0 0;
+  color: #8fa3bb;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 5px;
+  color: #c8d7e9;
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.viewAll svg {
+  color: #49dfff;
+  transition: transform 180ms ease;
+}
+
+.viewAll:hover {
+  color: #49dfff;
+}
+
+.viewAll:hover svg {
+  transform: translateX(4px);
+}
+
+.featuredCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(117, 160, 201, 0.2);
+  border-radius: 17px;
+  background: linear-gradient(
+    135deg,
+    rgba(17, 34, 54, 0.95),
+    rgba(9, 23, 39, 0.98)
+  );
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+.imagePanel {
+  position: relative;
+  display: block;
+  min-height: 420px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(53, 196, 255, 0.19),
+      transparent 45%
+    ),
+    #0b1d30;
+  text-decoration: none;
+}
+
+.coverImage {
+  object-fit: cover;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.imagePanel:hover .coverImage {
+  transform: scale(1.055);
+}
+
+.imageFallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: #52dfff;
+  background:
+    linear-gradient(rgba(80, 160, 220, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 160, 220, 0.055) 1px, transparent 1px),
+    #0b1d30;
+  background-size: 35px 35px;
+}
+
+.imageFallback span {
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.2em;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 12, 23, 0.15) 0%,
+    transparent 35%,
+    rgba(3, 12, 23, 0.78) 100%
+  );
+  pointer-events: none;
+}
+
+.imageBadge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(109, 224, 255, 0.3);
+  border-radius: 7px;
+  color: #dffaff;
+  background: rgba(6, 24, 41, 0.82);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(12px);
+}
+
+.imageBadge svg {
+  color: #51dfff;
+}
+
+.imageArrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(210, 232, 255, 0.25);
+  border-radius: 50%;
+  color: white;
+  background: rgba(6, 24, 41, 0.65);
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.imagePanel:hover .imageArrow {
+  color: #06121e;
+  background: #52dfff;
+  transform: rotate(45deg);
+}
+
+.imageCaption {
+  position: absolute;
+  right: 20px;
+  bottom: 22px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #d6e9fb;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+}
+
+.captionLine {
+  width: 38px;
+  height: 1px;
+  background: #4cdbff;
+}
+
+.articleContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(27px, 4vw, 48px);
+}
+
+.articleTopline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px solid rgba(73, 220, 255, 0.24);
+  border-radius: 5px;
+  color: #5cddff;
+  background: rgba(73, 220, 255, 0.07);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.articleType {
+  color: #788da6;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+}
+
+.articleTitle {
+  margin: 23px 0 0;
+  font-size: clamp(25px, 3vw, 37px);
+  font-weight: 730;
+  line-height: 1.24;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.articleTitle a {
+  color: #f1f7ff;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.articleTitle a:hover {
+  color: #5bdfff;
+}
+
+.excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 18px 0 0;
+  color: #95a8bf;
+  font-size: 13px;
+  line-height: 1.9;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 29px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(130, 166, 202, 0.14);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorAvatar {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(74, 220, 255, 0.3);
+  border-radius: 50%;
+  color: #56ddff;
+  background: rgba(74, 220, 255, 0.09);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.authorInfo small {
+  color: #7389a2;
+  font-size: 9px;
+}
+
+.authorInfo strong {
+  color: #d9e7f7;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.metaDivider {
+  width: 1px;
+  height: 28px;
+  background: rgba(130, 166, 202, 0.2);
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #93a8c0;
+  font-size: 10px;
+}
+
+.metaItem svg {
+  color: #50d9ff;
+}
+
+.articleFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #51dfff;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.readMore svg {
+  transition: transform 180ms ease;
+}
+
+.readMore:hover svg {
+  transform: translateX(5px);
+}
+
+.footerNote {
+  color: #667e98;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+
+@media (min-width: 1500px) {
+  .container {
+    width: min(1320px, calc(100% - 100px));
+  }
+}
+
+@media (max-width: 900px) {
+  .featuredCard {
+    grid-template-columns: 1fr;
+  }
+
+  .imagePanel {
+    min-height: 360px;
+  }
+
+  .articleContent {
+    padding: 30px;
+  }
+
+  .articleTitle {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 62px 0;
+  }
+
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 33px;
+  }
+
+  .sectionDescription {
+    font-size: 12px;
+  }
+
+  .featuredCard {
+    border-radius: 12px;
+  }
+
+  .imagePanel {
+    min-height: 260px;
+  }
+
+  .imageBadge {
+    top: 13px;
+    left: 13px;
+    padding: 8px 9px;
+    font-size: 8px;
+  }
+
+  .imageArrow {
+    top: 13px;
+    right: 13px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .articleContent {
+    padding: 23px 19px;
+  }
+
+  .articleTitle {
+    margin-top: 19px;
+    font-size: 27px;
+  }
+
+  .excerpt {
+    font-size: 12px;
+  }
+
+  .metadata {
+    gap: 14px;
+    margin-top: 23px;
+  }
+
+  .metaDivider {
+    display: none;
+  }
+
+  .articleFooter {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coverImage,
+  .imageArrow,
+  .viewAll svg,
+  .readMore svg {
+    transition: none;
+  }
+}

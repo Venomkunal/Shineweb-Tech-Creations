@@ -1,0 +1,482 @@
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 55px 24px 100px;
+  background: #07111f;
+  color: #eaf5ff;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  align-items: center;
+  gap: 55px;
+  max-width: 1240px;
+  min-height: 410px;
+  margin: 0 auto;
+  padding: 65px 70px;
+  overflow: hidden;
+  border: 1px solid rgba(82, 207, 239, 0.23);
+  border-radius: 28px;
+  background:
+    linear-gradient(115deg, rgba(11, 31, 50, 0.98), rgba(7, 23, 39, 0.96)),
+    #0b1b2b;
+}
+
+.glow {
+  position: absolute;
+  top: -220px;
+  left: -100px;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background: rgba(0, 185, 224, 0.12);
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.gridPattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(106, 181, 211, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106, 181, 211, 0.045) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(90deg, black, transparent 85%);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 21px;
+  color: #63def5;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 45px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+
+.title span {
+  color: #5bd9f2;
+}
+
+.description {
+  max-width: 540px;
+  margin: 20px 0 28px;
+  color: #9aafc4;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.form {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  max-width: 570px;
+}
+
+.emailField {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 0 16px;
+  border: 1px solid rgba(135, 177, 203, 0.2);
+  border-radius: 11px;
+  background: rgba(4, 15, 27, 0.7);
+  color: #63dff5;
+  transition: border-color 180ms ease;
+}
+
+.emailField:focus-within {
+  border-color: rgba(87, 216, 245, 0.75);
+}
+
+.emailField input {
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #eaf5ff;
+  font: inherit;
+  font-size: 12px;
+}
+
+.emailField input::placeholder {
+  color: #778da3;
+}
+
+.submitButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 19px;
+  border: 1px solid #5adbf4;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #5bdcf4, #23b8dc);
+  color: #041421;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  margin-top: 12px;
+  color: #91a8bc;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.successMessage {
+  color: #6ce4b0;
+}
+
+.errorMessage {
+  color: #ff9eaa;
+}
+
+.privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 13px;
+  color: #7f96aa;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.privacy svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #61cdbf;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(4, 20, 33, 0.3);
+  border-top-color: #041421;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.visual {
+  position: relative;
+  display: grid;
+  min-height: 300px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.orbitOuter,
+.orbitInner {
+  position: absolute;
+  border: 1px solid rgba(81, 209, 241, 0.19);
+  border-radius: 50%;
+}
+
+.orbitOuter {
+  width: 290px;
+  height: 290px;
+  animation: rotate 32s linear infinite;
+}
+
+.orbitInner {
+  width: 215px;
+  height: 215px;
+  border-style: dashed;
+  border-color: rgba(81, 209, 241, 0.25);
+  animation: rotateReverse 28s linear infinite;
+}
+
+.orbitNode,
+.orbitNodeInner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #83e9fb;
+  border-radius: 50%;
+  background: #0d728e;
+  box-shadow: 0 0 17px rgba(73, 220, 247, 0.65);
+}
+
+.orbitNode:first-child {
+  top: 31px;
+  left: 47px;
+}
+
+.orbitNode:last-child {
+  right: 20px;
+  bottom: 67px;
+}
+
+.orbitNodeInner {
+  top: 24px;
+  right: 40px;
+  width: 8px;
+  height: 8px;
+}
+
+.mailCard {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 290px);
+  padding: 23px;
+  border: 1px solid rgba(100, 216, 243, 0.32);
+  border-radius: 19px;
+  background: linear-gradient(
+    145deg,
+    rgba(21, 51, 73, 0.97),
+    rgba(8, 27, 45, 0.98)
+  );
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.28),
+    inset 0 1px rgba(255, 255, 255, 0.05);
+  animation: float 5s ease-in-out infinite;
+}
+
+.mailCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.mailIcon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(86, 218, 244, 0.3);
+  border-radius: 13px;
+  background: rgba(42, 180, 215, 0.13);
+  color: #69e2f7;
+}
+
+.mailStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #a2b8cb;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+}
+
+.mailStatus span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #55e1b1;
+  box-shadow: 0 0 10px rgba(85, 225, 177, 0.5);
+}
+
+.mailLine {
+  width: 100%;
+  height: 8px;
+  margin-top: 12px;
+  border-radius: 99px;
+  background: rgba(141, 174, 198, 0.18);
+}
+
+.mailLineShort {
+  width: 61%;
+}
+
+.mailLineMedium {
+  width: 79%;
+}
+
+.mailCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 29px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(135, 177, 203, 0.15);
+  color: #70dff4;
+  font-size: 11px;
+}
+
+.floatingLabel {
+  position: absolute;
+  right: -4px;
+  bottom: 25px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 15px;
+  border: 1px solid rgba(92, 221, 191, 0.28);
+  border-radius: 12px;
+  background: #102a35;
+  color: #91f0ce;
+  font-size: 11px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.75fr);
+    gap: 25px;
+    padding: 48px 35px;
+  }
+
+  .orbitOuter {
+    width: 240px;
+    height: 240px;
+  }
+
+  .orbitInner {
+    width: 180px;
+    height: 180px;
+  }
+
+  .mailCard {
+    padding: 19px;
+  }
+
+  .floatingLabel {
+    right: -10px;
+  }
+}
+
+@media (max-width: 680px) {
+  .section {
+    padding: 30px 16px 75px;
+  }
+
+  .container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+    padding: 35px 22px 25px;
+    border-radius: 21px;
+  }
+
+  .title {
+    font-size: clamp(29px, 8vw, 39px);
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .form {
+    flex-direction: column;
+  }
+
+  .emailField input {
+    height: 49px;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+
+  .visual {
+    min-height: 285px;
+  }
+
+  .orbitOuter {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orbitInner {
+    width: 185px;
+    height: 185px;
+  }
+
+  .mailCard {
+    width: min(100%, 275px);
+  }
+
+  .floatingLabel {
+    right: 0;
+    bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitOuter,
+  .orbitInner,
+  .mailCard,
+  .spinner {
+    animation: none;
+  }
+
+  .submitButton {
+    transition: none;
+  }
+}
