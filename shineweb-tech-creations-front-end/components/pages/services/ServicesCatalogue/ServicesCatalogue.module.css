@@ -1,0 +1,263 @@
+.section {
+  padding: 100px 24px;
+  color: #f4f8ff;
+  background: #070d19;
+  scroll-margin-top: 90px;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.heading {
+  max-width: 750px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: #63d9ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin: 16px 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.18;
+  letter-spacing: -0.045em;
+}
+
+.heading h2 span {
+  color: #64d7ff;
+}
+
+.heading p {
+  color: #a4b2c8;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.filter {
+  padding: 11px 17px;
+  border: 1px solid #25354d;
+  border-radius: 999px;
+  color: #aebdd1;
+  background: #0c1525;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.filter:hover {
+  border-color: #438fb6;
+  color: #e9f7ff;
+}
+
+.activeFilter {
+  border-color: #4fc8fa;
+  color: #05111f;
+  background: linear-gradient(110deg, #82e6ff, #4caaff);
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid #1d2d43;
+  border-radius: 17px;
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(37, 125, 181, 0.09),
+      transparent 38%
+    ),
+    #0c1524;
+  transition:
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #337fa5;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  color: #69dcff;
+  border: 1px solid rgba(89, 203, 255, 0.25);
+  border-radius: 14px;
+  background: rgba(50, 155, 219, 0.1);
+}
+
+.category {
+  color: #8eabc6;
+  font-size: 10px;
+  text-align: right;
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+}
+
+.description {
+  margin: 0;
+  color: #9eacc1;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.features {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0 26px;
+  padding: 19px 0 0;
+  border-top: 1px solid #1e2b3e;
+  list-style: none;
+}
+
+.features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #c2cede;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.features li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #5cdbb5;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid #1e2b3e;
+  color: #73dcff;
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.link svg {
+  transition: transform 180ms ease;
+}
+
+.link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.bottomNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 35px;
+  padding: 19px 22px;
+  border: 1px solid #1b3045;
+  border-radius: 12px;
+  background: rgba(16, 32, 51, 0.55);
+  color: #9eafc5;
+}
+
+.bottomNote svg {
+  flex-shrink: 0;
+  color: #66d9ff;
+}
+
+.bottomNote p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 70px 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 23px;
+  }
+
+  .filters {
+    justify-content: flex-start;
+  }
+
+  .filter {
+    padding: 10px 13px;
+  }
+
+  .bottomNote {
+    align-items: flex-start;
+    padding: 17px;
+  }
+
+  .bottomNote > svg:last-child {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .filter,
+  .link svg {
+    transition: none;
+  }
+}

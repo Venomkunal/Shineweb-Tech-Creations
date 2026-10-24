@@ -1,0 +1,234 @@
+.section {
+  padding: 80px 24px 100px;
+  color: #f5f9ff;
+  background: #09111f;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 35px;
+  overflow: hidden;
+  padding: 60px;
+  border: 1px solid #25415b;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #10233a, #0b1729 65%, #102d45);
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -180px;
+  left: 25%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(22, 158, 231, 0.15);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.content {
+  max-width: 690px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #74ddff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.content h2 {
+  margin: 22px 0 18px;
+  font-size: clamp(31px, 4vw, 49px);
+  line-height: 1.16;
+  letter-spacing: -0.045em;
+}
+
+.content h2 span {
+  color: #6bdcff;
+}
+
+.content > p {
+  max-width: 610px;
+  color: #a9bbd2;
+  font-size: 14px;
+  line-height: 1.95;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.primaryButton {
+  color: #05121e;
+  background: linear-gradient(110deg, #80e6ff, #4caaff);
+}
+
+.secondaryButton {
+  color: #e5f3ff;
+  border: 1px solid #36536f;
+  background: rgba(9, 20, 36, 0.6);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-3px);
+}
+
+.note {
+  display: block;
+  margin-top: 23px;
+  color: #8da5be;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 300px;
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid rgba(101, 208, 255, 0.27);
+  border-radius: 50%;
+}
+
+.ringOne {
+  width: 240px;
+  height: 240px;
+}
+
+.ringTwo {
+  width: 180px;
+  height: 180px;
+  border-color: rgba(101, 208, 255, 0.45);
+}
+
+.centerIcon {
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  border: 1px solid #4ca9d7;
+  border-radius: 30px;
+  background: radial-gradient(circle at top left, #1e4d6b, #0c1b2e);
+  color: #81e5ff;
+  box-shadow: 0 0 65px rgba(55, 175, 240, 0.2);
+}
+
+.dot {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #6bdcff;
+  box-shadow: 0 0 18px rgba(107, 220, 255, 0.8);
+}
+
+.dotOne {
+  top: 28px;
+  right: 28%;
+}
+
+.dotTwo {
+  right: 7%;
+  bottom: 65px;
+}
+
+.dotThree {
+  bottom: 28px;
+  left: 25%;
+}
+
+@media (max-width: 900px) {
+  .card {
+    grid-template-columns: 1fr;
+    padding: 42px;
+  }
+
+  .visual {
+    min-height: 230px;
+  }
+
+  .ringOne {
+    width: 210px;
+    height: 210px;
+  }
+
+  .ringTwo {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 55px 18px 70px;
+  }
+
+  .card {
+    padding: 29px 22px;
+    border-radius: 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .visual {
+    min-height: 210px;
+  }
+
+  .centerIcon {
+    width: 90px;
+    height: 90px;
+    border-radius: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton,
+  .secondaryButton {
+    transition: none;
+  }
+}
